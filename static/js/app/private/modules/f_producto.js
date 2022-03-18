@@ -18,7 +18,7 @@ jQuery(document).ready(function ($) {
 
 						});
 					} else {
-						alert('Ocurrió un error, por favor vuelva a intentarlo');
+						alert('Ocurrió un error, por favor vuelva a intentarlo, primero ingrese proveedores');
 					}
 				},
 				error: function (ts) {

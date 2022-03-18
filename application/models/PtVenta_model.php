@@ -4,31 +4,31 @@ defined('BASEPATH') OR exit('No se permite el acceso directo.');
 class PtVenta_model extends CI_Model{
 
 	public function getAll(){
-		$rs = $this->db->get('ptVenta');
+		$rs = $this->db->get('puntoventa');
 		return $rs->num_rows() > 0 ? $rs->result() : NULL;
 	}
 
      public function getById($id)
     {
-        $cmd = "SELECT * FROM ptVenta where idPtVenta = ".$id;
+        $cmd = "SELECT * FROM puntoventa where idPuntoVenta = ".$id;
 
         $query = $this->db->query($cmd);
         return ($query->num_rows() == 1) ? $query->row() : NULL;
     }
 
 	public function insert($data){
-		return $this->db->insert('ptVenta', $data) ? true : NULL;
+		return $this->db->insert('puntoventa', $data) ? true : NULL;
 	}
 
 
-    public function update($entry, $idPtVenta)
+    public function update($entry, $idPuntoVenta)
     {
         try {
             $this->db->set($entry);
-            $this->db->where('idPtVenta', $idPtVenta);
-            $this->db->update('ptVenta');
+            $this->db->where('idPuntoVenta', $idPuntoVenta);
+            $this->db->update('puntoventa');
 
-            return ($idPtVenta) ? TRUE : NULL;
+            return ($idPuntoVenta) ? TRUE : NULL;
         }
 
         catch(Exception $e) {
@@ -38,7 +38,7 @@ class PtVenta_model extends CI_Model{
 
      public function deleteById($id)
     {
-        $cmd = "DELETE FROM ptVenta where idPtVenta = ".$id;
+        $cmd = "DELETE FROM puntoventa where idPuntoVenta = ".$id;
 
         $query = $this->db->query($cmd);
         return (TRUE) ? TRUE : NULL;
@@ -49,14 +49,14 @@ class PtVenta_model extends CI_Model{
 
 /*
 {
-	"table": "ptVenta",
+	"table": "puntoventa",
 	"rows":
 	[
 		{
-			"idPtVenta": 1,
+			"idPuntoVenta": 1,
 			"unidadMedida": "lts",
-			"idPtVenta": 1,
-			"nombre": "ptVenta 1",
+			"idPuntoVenta": 1,
+			"nombre": "puntoventa 1",
 			"precioVenta": 1
 		}
 	]

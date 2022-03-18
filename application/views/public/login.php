@@ -16,12 +16,12 @@
 			    <p>Iniciar sesión</p>
 			    <form>
 				  <div class="form-group m-2">
-				    <label for="exampleInputEmail1">Usuario</label>
-				    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+				    <label for="email">Usuario</label>
+				    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingresa tu email">
 				  </div>
 				  <div class="form-group m-2">
-				    <label for="exampleInputPassword1">Contraseña</label>
-				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				    <label for="password">Contraseña</label>
+				    <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
 				  </div>
 				  <div class="form-check m-2">
 				  </div>
@@ -29,7 +29,7 @@
 				    <div class="col-sm">
 				    </div>
 				    <div class="col-sm">
-				     <button type="submit" class="btn btn-primary">ACCEDER</button>
+				     <button type="submit" class="btn btn-primary btn-login">ACCEDER</button>
 				    </div>
 				    <div class="col-sm">
 				    </div>

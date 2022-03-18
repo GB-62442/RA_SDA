@@ -5,8 +5,11 @@ class Controlador extends CI_Controller{
 	}
 
 	public function index(){
+
+		$data['scripts'][]          = 'app/private/modules/acceso';
+
 		$this->load->view( "public/componentes/public_header_f" );
-		$this->load->view( "public/login" );
+		$this->load->view( "public/login", $data );
 		$this->load->view( "public/componentes/footer_f");
 	}
 

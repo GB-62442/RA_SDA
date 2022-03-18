@@ -11,7 +11,7 @@ class Inventario_model extends CI_Model{
 	}
 
 	public function insert($data){
-		return $this->db->insert('inventario', $data) ? true : NULL;
+		return $this->db->insert('puntoventainsumo', $data) ? true : NULL;
 	}
 
 }

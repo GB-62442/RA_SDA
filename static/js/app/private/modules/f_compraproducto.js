@@ -1,24 +1,25 @@
 jQuery(document).ready(function ($) {
-	console.log('en -  f_producto.js');
+	console.log('en -  f_mermaproducto.js');
 
 	// cargar los proveedores
 	$(document).ready(function () {
 		console.log('ready!');
+
  			$.ajax({
-				url: base_url() + 'proveedor/getall',
+				url: base_url() + 'ptventa/getall',
 				type: 'post',
  				cache: false,
 				dataType: 'json',
 				success: function (json) {
 					if (json.resultado == 'true') {
 						$.each( json.respuesta, function( k, v ) {
-            				$('#select_prov').append(`<option value="${v.idProveedor}">
+            				$('#select_pv').append(`<option value="${v.	idPuntoVenta}">
                             	${v.nombre}
                             </option>`);
 
 						});
 					} else {
-						alert('Ocurrió un error, por favor vuelva a intentarlo, primero ingrese proveedores');
+						alert('Ocurrió un error, por favor vuelva a intentarlo, primero ingrese puntos de venta');
 					}
 				},
 				error: function (ts) {
@@ -26,7 +27,7 @@ jQuery(document).ready(function ($) {
 					alert('Ocurrió un error, por favor vuelva a intentarlo');
 					
 				},
-			}); 
+			}); 		
 
  			if($('#id_registro').val() !== ''){
  			//Cargar datos
@@ -40,9 +41,6 @@ jQuery(document).ready(function ($) {
 					if (json.resultado == 'true') {
 						console.log(json);
 						$('#nombre').val(json.respuesta.nombre).change();
-						$('#select_unidad').val(json.respuesta.unidadMedida).change();
-						$('#select_prov').val(json.respuesta.idProveedor).change();					
-						$('#precio_vta').val(json.respuesta.precioVenta).change();
 					} else {
 						alert('Ocurrió un error, por favor vuelva a intentarlo,45');
 					}
@@ -64,49 +62,17 @@ jQuery(document).ready(function ($) {
 		event.preventDefault();
 
 		$.ajax({
-			url: base_url() + 'producto/insert',
-			type: 'post',
-			data: { 
-				nombre: 		$('#nombre').val(),
-				unidadMedida: 	$('#select_unidad').val(),
-				idProveedor: 	$('#select_prov').val(),
-				precioVenta: 	$('#precio_vta').val(),
-			},
-			cache: false,
-			dataType: 'json',
-			success: function (json) {
-
-				if (json.resultado == 'true') {
-					alert(json.mensaje); 
-					window.location = base_url() + 'controlador/productos';
-				} else {
-					alert(json.mensaje);
-				}
-			},
-			error: function (ts) {
-				console.log(ts.responseText);
-				alert('Ocurrió un error, por favor vuelva a intentarlo');
-			},
-		});
-	});
-
-	$(document).on('click', '.btn-update', function (event) {
-		event.preventDefault();
-
-		$.ajax({
-			url: base_url() + 'producto/edit',
+			url: base_url() + 'compraproducto/insert',
 			type: 'post',
 			data: { 
 				idProducto: 	$('#id_registro').val(),
-				nombre: 		$('#nombre').val(),
-				unidadMedida: 	$('#select_unidad').val(),
-				idProveedor: 	$('#select_prov').val(),
-				precioVenta: 	$('#precio_vta').val(),
+				cantidad: 		$('#cantidad').val(),
+				idPuntoVenta: 	$('#select_pv').val(),
+				precio: 		$('#precio').val(),
 			},
 			cache: false,
 			dataType: 'json',
 			success: function (json) {
-
 
 				if (json.resultado == 'true') {
 					alert(json.mensaje); 

@@ -26,9 +26,9 @@
 					      	
 							<a href="<?=base_url('/controlador/detalleproducto?id=')?><?php echo($r->idProducto) ?>" type="button" class="btn btn-outline-dark btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
 							<button type="button" class="btn btn-outline-dark btn-sm btn-delete" data-info="<?php echo($r->idProducto) ?>"><i class="fa-solid fa-trash"></i></button>
-							<button type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idProducto) ?>"><i class="fa-solid fa-dollar-sign"></i></button>
-							<button type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idProducto) ?>" >Merma</button>
-							<button type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idProducto) ?>" >Historial Merma</button>
+							<a href="<?=base_url('/controlador/compraproducto?id=')?><?php echo($r->idProducto) ?>" type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idProducto) ?>"><i class="fa-solid fa-dollar-sign"></i></a>
+							<a href="<?=base_url('/controlador/mermaproducto?id=')?><?php echo($r->idProducto) ?>" type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idProducto) ?>" >Merma</a>
+							<a href="<?=base_url('/controlador/historialmermaproducto?id=')?><?php echo($r->idProducto) ?>" type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idProducto) ?>" >Historial Merma</a>
 
 					      </td>
 					    </tr> 

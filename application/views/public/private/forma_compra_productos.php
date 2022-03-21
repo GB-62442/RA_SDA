@@ -3,7 +3,7 @@
 
 	<div class="page-header" id="banner">
 
-		<h1>Detalle producto</h1>
+		<h1>Compra producto</h1>
 	</div>
 	
 
@@ -26,44 +26,39 @@
 					      <label for="id_registro" class="form-label mt-4">ID</label>
 					      <input type="text" class="form-control" id="id_registro" aria-describedby="emailHelp" placeholder="ID del producto" value="<?php if(isset($id)) echo($id); ?>" readonly>
 						</div>
-						<?php }else{ ?>
-
-						<input type="hidden" class="form-control" id="id_registro" aria-describedby="emailHelp" placeholder="ID del producto" value="" readonly>
-						<?php } ?>
-
 
 					    <div class="form-group">
 					      <label for="nombre" class="form-label mt-4">Nombre</label>
-					      <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp" placeholder="Nombre del producto">
+					      <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp" placeholder="Nombre del producto" readonly>
 							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
 						</div>
 
 					    <div class="form-group">
-					      <label for="select_unidad" class="form-label mt-4">Unidad de medida</label>
-					      <select class="form-select" id="select_unidad">
-					      	<option>Selecciona una opcion</option>
-					        <option value="lts">Litro (lts.)</option>
-					        <option value="ml">Mililitro (ml.)</option>
-					        <option value="cc">Centímetros cúbicos (c.c.)</option>
-					        <option value="kg">Kilogramos(kg.)</option>
-					        <option value="gr">Gramos (gr.)</option>
-					        <option value="lb">Libra (lb.)</option>
-					        <option value="oz">Onza (oz.)</option>
-					      </select>
-					    </div>
-
-					    <div class="form-group">
-					      <label for="exampleSelect2" class="form-label mt-4">Proveedor</label>
-					      <select class="form-select" id="select_prov">
-					        <option value="0">Selecciona un proveedor</option> 
-					      </select>
-					    </div>
-
-					    <div class="form-group">
-					      <label for="precio_vta" class="form-label mt-4">Precio de venta</label>
-					      <input type="number" min="0.1" step="0.1" class="form-control" id="precio_vta" aria-describedby="emailHelp" placeholder="Precio de venta del producto">
+					      <label for="cantidad" class="form-label mt-4">Cantidad</label>
+					      <input type="number" min="1" step="1" class="form-control" id="cantidad" aria-describedby="emailHelp" placeholder="Cantidad del producto">
 							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
 						</div>
+
+					    <div class="form-group">
+					      <label for="exampleSelect2" class="form-label mt-4">Punto de venta</label>
+					      <select class="form-select" id="select_pv">
+					        <option value="0">Selecciona un punto de venta</option> 
+					      </select>
+					    </div>
+
+					    <div class="form-group">
+					      <label for="precio" class="form-label mt-4">Precio</label>
+					      <input type="number" min="1" step="1" class="form-control" id="precio" aria-describedby="emailHelp" placeholder="precio del producto">
+							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
+						</div>
+
+
+						<?php }else{ ?>
+
+							<h4>No se encontraron registros</h4>
+						<?php } ?>
+
+
 
 					</div>
 					<div class="row m-4"></div>
@@ -73,9 +68,9 @@
 					</div>
 					<div class="col">
 						<?php if(isset($editable) && $editable != false){ ?>
-							<button class="form-control btn btn-outline-primary btn-sm btn-update" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
-						<?php }else{ ?>
 							<button class="form-control btn btn-outline-primary btn-sm btn-add" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
+						<?php }else{ ?>
+ 
 						<?php } ?>
 						<div class="row mt-2"></div>
 						<!-- <button class="form-control btn btn-outline-primary btn-sm" type="button">EXPORTAR A EXCEL <i class="fa-solid fa-file-export"></i></button> -->

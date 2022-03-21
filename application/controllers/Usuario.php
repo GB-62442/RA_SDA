@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No se permite el acceso directo.');
 
-class PtVenta extends CI_Controller{
+class Usuario extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('PtVenta_model');
+		$this->load->model('Usuario_model');
 	}
 
 	public function getAll(){
@@ -15,7 +15,7 @@ class PtVenta extends CI_Controller{
 			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
 			$respuesta['respuesta'] = null;
 
-			$res = $this->PtVenta_model->getAll();
+			$res = $this->Usuario_model->getAll();
 
 			if($res != NULL){
 				$respuesta['resultado'] = 'true';
@@ -33,13 +33,15 @@ class PtVenta extends CI_Controller{
 			$respuesta['resultado'] = 'false';
 			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
 			$respuesta['respuesta'] = null;
-            
-            
-            $this->form_validation->set_data($_POST)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+           
+        		$post_id       = $this->input->post('id'); 
+
+			$datos_post = array();
+			
+            $this->form_validation->set_data($datos_post)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
 		
             if ($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/) {
-  				$id_registro        = $this->input->post('id'); 
-                $res = $this->PtVenta_model->getById($id_registro); 
+                 $res = $this->Usuario_model->getById($post_id); 
 
 				if($res != NULL){
 
@@ -50,6 +52,7 @@ class PtVenta extends CI_Controller{
 				}
 
              }
+
 
             /*Si la validación de campos es incorrecta*/
             else {
@@ -62,6 +65,43 @@ class PtVenta extends CI_Controller{
 		//}
 	}
 
+	public function getsesiones(){
+		//if($this->session->userdata('login') == true){
+			$respuesta = array();
+			$respuesta['resultado'] = 'false';
+			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
+			$respuesta['respuesta'] = null;
+           
+        		$post_id       = $this->input->post('id'); 
+
+			$datos_post = array();
+			
+            $this->form_validation->set_data($datos_post)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+		
+            if ($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/) {
+                 $res = $this->Usuario_model->getSesionesById($post_id); 
+
+				if($res != NULL){
+
+				$respuesta['resultado'] = 'true';
+				$respuesta['mensaje'] = 'Registros obtenidos con éxito';
+				$respuesta['respuesta'] = $res;
+
+				}
+
+             }
+
+
+            /*Si la validación de campos es incorrecta*/
+            else {
+            	$this->form_validation->set_error_delimiters('','');
+				$respuesta['error'] = validation_errors();
+            }
+			
+            echo json_encode($respuesta);
+
+		//}
+	}
 
 	public function insert(){
 		//if($this->session->userdata('login') == true){
@@ -71,19 +111,23 @@ class PtVenta extends CI_Controller{
 			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
 			$respuesta['respuesta'] = null;
 
-			$this->form_validation->set_rules('nombre', 'nombre del PtVenta', 'required|htmlspecialchars|max_length[50]|trim');
-			$this->form_validation->set_rules('idUsuario', 'id del Usuario', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required');
+			$this->form_validation->set_rules('nombre', 'nombre del Usuario', 'required|htmlspecialchars|max_length[50]|trim');
+			$this->form_validation->set_rules('rol', 'rol', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
+			$this->form_validation->set_rules('pass', 'pass del Usuario', 'required|htmlspecialchars|max_length[50]|trim');
+			$this->form_validation->set_rules('pass_r', 'pass_r del Usuario', 'required|htmlspecialchars|max_length[50]|trim|matches[pass]');
 
 			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
- 				$nombre 		= $this->input->post("nombre");
-				$idUsuario		= $this->input->post("idUsuario");
+				$nombre 		= $this->input->post("nombre");
+				$rol 		= $this->input->post("rol");
+				$pass 		= $this->input->post("pass");
 
 				$data = array(
 					"nombre" 		=> $nombre,
-					"idUsuario"		=> $idUsuario,
+					"rol" 		=> $rol,
+					"pass" 		=> $pass,
 				);
 
-				$is_affected = $this->PtVenta_model->insert($data);
+				$is_affected = $this->Usuario_model->insert($data);
 
 				if($is_affected != NULL){
 					$respuesta['resultado'] = 'true';
@@ -103,7 +147,6 @@ class PtVenta extends CI_Controller{
 		//}
 	}
 
-
 	public function edit(){
 		//if($this->session->userdata('login') == true){
 
@@ -112,25 +155,34 @@ class PtVenta extends CI_Controller{
 			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
 			$respuesta['respuesta'] = null;
 
-			$this->form_validation->set_rules('idPtVenta', 'id del PtVenta', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required');
-			$this->form_validation->set_rules('nombre', 'nombre del PtVenta', 'required|htmlspecialchars|max_length[50]|trim');
-			$this->form_validation->set_rules('idUsuario', 'id del Usuario', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required');
+			$this->form_validation->set_rules('idUsuario', 'usuario', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
+			$this->form_validation->set_rules('nombre', 'nombre del Usuario', 'required|htmlspecialchars|max_length[50]|trim');
+			$this->form_validation->set_rules('rol', 'rol', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
+			$this->form_validation->set_rules('pass', 'pass del Usuario', 'htmlspecialchars|max_length[50]|trim');
+			$this->form_validation->set_rules('pass_r', 'pass_r del Usuario', 'htmlspecialchars|max_length[50]|trim|matches[pass_r]');
 
 			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
-				$idPtVenta 	= $this->input->post("idPtVenta");
+				$idUsuario 	= $this->input->post("idUsuario");
 				$nombre 		= $this->input->post("nombre");
-				$idUsuario		= $this->input->post("idUsuario");
+				$rol 		= $this->input->post("rol");
+				$pass 		= $this->input->post("pass");
+
 
 				//revisar que exista el registro
-				$res = $this->PtVenta_model->getById($idPtVenta); 
+				$res = $this->Usuario_model->getById($idUsuario); 
 
 				if($res != NULL){
 					$data = array(
+						"idUsuario" 	=> $idUsuario,
 						"nombre" 		=> $nombre,
-						"idUsuario"		=> $idUsuario,
+						"rol" 		=> $rol,
 					);
 
-					$is_affected = $this->PtVenta_model->update($data, $idPtVenta);
+					if($pass != null){
+						$data['pass']	= $pass;
+					}
+
+					$is_affected = $this->Usuario_model->update($data, $idUsuario);
 
 					if($is_affected != NULL){
 						$respuesta['resultado'] = 'true';
@@ -163,17 +215,17 @@ class PtVenta extends CI_Controller{
 			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
 			$respuesta['respuesta'] = null;
 
-			$this->form_validation->set_rules('idPtVenta', 'id del PtVenta', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required');
+			$this->form_validation->set_rules('idUsuario', 'id del Usuario', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required');
 
 			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
-				$idPtVenta		= $this->input->post("idPtVenta");
+				$idUsuario		= $this->input->post("idUsuario");
 
 				//revisar que exista el registro
-				$res = $this->PtVenta_model->getById($idPtVenta); 
+				$res = $this->Usuario_model->getById($idUsuario); 
 
 				if($res != NULL){
 
-					$is_affected = $this->PtVenta_model->deleteById($idPtVenta);
+					$is_affected = $this->Usuario_model->deleteById($idUsuario);
 
 					if($is_affected != NULL){
 						$respuesta['resultado'] = 'true';
@@ -197,17 +249,17 @@ class PtVenta extends CI_Controller{
 		//}
 	}
 
-
 	public function tabla(){
 		//if($this->session->userdata('login') == true){
             
-        $data['res'] = $this->PtVenta_model->getAll(); 
+        $data['res'] = $this->Usuario_model->getAll(); 
 
-        $html = $this->load->view('public/private/tabla_ptventa', $data, true);
+        $html = $this->load->view('public/private/tabla_usuarios', $data, true);
         echo $html; 				
             
 		//}
-	}		
+	}
+
 
 }
 

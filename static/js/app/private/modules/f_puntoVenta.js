@@ -5,6 +5,30 @@ jQuery(document).ready(function ($) {
 	$(document).ready(function () {
 		console.log('ready!'); 
 
+ 			$.ajax({
+				url: base_url() + 'usuario/getall',
+				type: 'post',
+ 				cache: false,
+				dataType: 'json',
+				success: function (json) {
+					if (json.resultado == 'true') {
+						$.each( json.respuesta, function( k, v ) {
+            				$('#select_us').append(`<option value="${v.idUsuario}">
+                            	${v.nombre}
+                            </option>`);
+
+						});
+					} else {
+						alert('Ocurrió un error, por favor vuelva a intentarlo, primero ingrese usuarios');
+					}
+				},
+				error: function (ts) {
+					console.log(ts.responseText);
+					alert('Ocurrió un error, por favor vuelva a intentarlo');
+					
+				},
+			}); 
+
  			if($('#id_registro').val() !== ''){
  			//Cargar datos
  		 	$.ajax({
@@ -17,14 +41,14 @@ jQuery(document).ready(function ($) {
 					console.log(json);
 					if (json.resultado == 'true') {
 						$('#nombre').val(json.respuesta.nombre).change();
-						
+						$('#select_us').val(json.respuesta.idUsuario).change();	
 					} else {
 						alert('Ocurrió un error, por favor vuelva a intentarlo');
 					}
 				},
 				error: function (ts) {
 					console.log(ts.responseText);
-					alert('Ocurrió un error, por favor vuelva a intentarlo, k');
+					alert('Ocurrió un error, por favor vuelva a intentarlo');
 					clear_form();
 				},
 			}); 
@@ -43,6 +67,7 @@ jQuery(document).ready(function ($) {
 			type: 'post',
 			data: { 
 				nombre: 		$('#nombre').val(),
+				idUsuario: 		$('#select_us').val(),
 			},
 			cache: false,
 			dataType: 'json',
@@ -50,7 +75,8 @@ jQuery(document).ready(function ($) {
  				console.log(json.mensaje);
 
 				if (json.resultado == 'true') {
-					alert(json.mensaje);
+					alert(json.mensaje); 
+					window.location = base_url() + 'controlador/puntosVenta';					
 				} else {
 					alert('Ocurrió un error, por favor vuelva a intentarlo');
 				}
@@ -71,6 +97,7 @@ jQuery(document).ready(function ($) {
 			data: { 
 				idPtVenta: 	$('#id_registro').val(),
 				nombre: 		$('#nombre').val(),
+				idUsuario: 		$('#select_us').val(),
 			},
 			cache: false,
 			dataType: 'json',
@@ -79,7 +106,8 @@ jQuery(document).ready(function ($) {
 				console.log(json);
 
 				if (json.resultado == 'true') {
-					alert(json.mensaje);
+					alert(json.mensaje); 
+					window.location = base_url() + 'controlador/puntosVenta';
 				} else {
 					alert('Ocurrió un error, por favor vuelva a intentarlo');
 				}

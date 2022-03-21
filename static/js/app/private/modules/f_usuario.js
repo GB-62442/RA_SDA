@@ -1,57 +1,31 @@
 jQuery(document).ready(function ($) {
-	console.log('en -  f_producto.js');
+	console.log('en -  f_usuario.js');
 
 	// cargar los proveedores
 	$(document).ready(function () {
 		console.log('ready!');
- 			$.ajax({
-				url: base_url() + 'proveedor/getall',
-				type: 'post',
- 				cache: false,
-				dataType: 'json',
-				success: function (json) {
-					if (json.resultado == 'true') {
-						$.each( json.respuesta, function( k, v ) {
-            				$('#select_prov').append(`<option value="${v.idProveedor}">
-                            	${v.nombre}
-                            </option>`);
-
-						});
-					} else {
-						alert('Ocurrió un error, por favor vuelva a intentarlo, primero ingrese proveedores');
-					}
-				},
-				error: function (ts) {
-					console.log(ts.responseText);
-					alert('Ocurrió un error, por favor vuelva a intentarlo');
-					
-				},
-			}); 
 
  			if($('#id_registro').val() !== ''){
  			//Cargar datos
  		 	$.ajax({
-				url: base_url() + 'producto/get',
+				url: base_url() + 'usuario/get',
 				type: 'post',
 				data: {id: $('#id_registro').val()},
  				cache: false,
 				dataType: 'json',
 				success: function (json) {
 					if (json.resultado == 'true') {
-						console.log(json);
-						$('#nombre').val(json.respuesta.nombre).change();
-						$('#select_unidad').val(json.respuesta.unidadMedida).change();
-						$('#select_prov').val(json.respuesta.idProveedor).change();					
-						$('#precio_vta').val(json.respuesta.precioVenta).change();
+ 						$('#nombre').val(json.respuesta.nombre).change(); 				
+						$('#select_rol').val(json.respuesta.rol).change();
 					} else {
-						alert('Ocurrió un error, por favor vuelva a intentarlo,45');
+						alert(json.mensaje);
+						console.log()
 					}
 				},
 				error: function (ts) {
 					console.log(ts.responseText);
 					alert('Ocurrió un error, por favor vuelva a intentarlo, k');
-					clear_form();
-				},
+ 				},
 			}); 
  		 }
 
@@ -64,13 +38,13 @@ jQuery(document).ready(function ($) {
 		event.preventDefault();
 
 		$.ajax({
-			url: base_url() + 'producto/insert',
+			url: base_url() + 'usuario/insert',
 			type: 'post',
 			data: { 
 				nombre: 		$('#nombre').val(),
-				unidadMedida: 	$('#select_unidad').val(),
-				idProveedor: 	$('#select_prov').val(),
-				precioVenta: 	$('#precio_vta').val(),
+				rol: 			$('#select_rol').val(),
+				pass: 			$('#pwd').val(),
+				pass_r: 		$('#pwd_r').val(),
 			},
 			cache: false,
 			dataType: 'json',
@@ -78,9 +52,10 @@ jQuery(document).ready(function ($) {
 
 				if (json.resultado == 'true') {
 					alert(json.mensaje); 
-					window.location = base_url() + 'controlador/productos';
+					window.location = base_url() + 'controlador/usuarios';
 				} else {
 					alert(json.mensaje);
+					console.log(json);
 				}
 			},
 			error: function (ts) {
@@ -94,14 +69,14 @@ jQuery(document).ready(function ($) {
 		event.preventDefault();
 
 		$.ajax({
-			url: base_url() + 'producto/edit',
+			url: base_url() + 'usuario/edit',
 			type: 'post',
 			data: { 
-				idProducto: 	$('#id_registro').val(),
+				idUsuario: 		$('#id_registro').val(),
 				nombre: 		$('#nombre').val(),
-				unidadMedida: 	$('#select_unidad').val(),
-				idProveedor: 	$('#select_prov').val(),
-				precioVenta: 	$('#precio_vta').val(),
+				rol: 			$('#select_rol').val(),
+				pass: 			$('#pwd').val(),
+				pass_r: 		$('#pwd_r').val(),
 			},
 			cache: false,
 			dataType: 'json',
@@ -110,9 +85,10 @@ jQuery(document).ready(function ($) {
 
 				if (json.resultado == 'true') {
 					alert(json.mensaje); 
-					window.location = base_url() + 'controlador/productos';
+					window.location = base_url() + 'controlador/usuarios';
 				} else {
 					alert(json.mensaje);
+					console.log(json);
 				}
 			},
 			error: function (ts) {

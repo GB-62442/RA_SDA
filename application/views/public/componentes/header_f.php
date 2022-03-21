@@ -40,7 +40,7 @@
                   <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                       <li class="nav-item">
-                        <a class="nav-link active" href="#">Gestion TAQ
+                        <a class="nav-link active" href="<?=base_url('/controlador/usuarios')?>">Gestion TAQ
                           <span class="visually-hidden">(current)</span>
                         </a>
                       </li>

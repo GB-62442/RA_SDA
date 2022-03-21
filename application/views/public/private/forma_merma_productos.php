@@ -3,7 +3,7 @@
 
 	<div class="page-header" id="banner">
 
-		<h1>Detalle punto de venta</h1>
+		<h1>Merma producto</h1>
 	</div>
 	
 
@@ -11,7 +11,7 @@
 		<div class="row m-2">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item active" aria-current="page" onclick="window.history.back();"><i class="fa-solid fa-angle-left" ></i> Volver atras</li>
+					<li class="breadcrumb-item active" aria-current="page" onclick="window.history.back();"><i class="fa-solid fa-angle-left"></i> Volver atras</li>
 				</ol>
 			</nav>
 		</div>
@@ -24,24 +24,26 @@
 						<?php if(isset($editable) && $editable != false){ ?>
 					    <div class="form-group">
 					      <label for="id_registro" class="form-label mt-4">ID</label>
-					      <input type="text" class="form-control" id="id_registro" aria-describedby="emailHelp" placeholder="ID del punto de venta" value="<?php if(isset($id)) echo($id); ?>">
+					      <input type="text" class="form-control" id="id_registro" aria-describedby="emailHelp" placeholder="ID del producto" value="<?php if(isset($id)) echo($id); ?>" readonly>
+						</div>
+
+					    <div class="form-group">
+					      <label for="nombre" class="form-label mt-4">Nombre</label>
+					      <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp" placeholder="Nombre del producto" readonly>
+							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
+						</div>
+
+					    <div class="form-group">
+					      <label for="cantidad" class="form-label mt-4">Cantidad</label>
+					      <input type="number" min="1" step="1" class="form-control" id="cantidad" aria-describedby="emailHelp" placeholder="Cantidad del producto">
+							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
 						</div>
 						<?php }else{ ?>
 
-						<input type="hidden" class="form-control" id="id_registro" aria-describedby="emailHelp" placeholder="ID del punto de venta" value="" readonly>
+							<h4>No se encontraron registros</h4>
 						<?php } ?>
 
-					    <div class="form-group">
-					      <label for="exampleInputEmail1" class="form-label mt-4">Nombre</label>
-					      <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp" placeholder="Nombre del punto de venta">
-					    </div>
 
-					    <div class="form-group">
-					      <label for="exampleSelect2" class="form-label mt-4">Usuario</label>
-					      <select class="form-select" id="select_us">
-					        <option value="0">Selecciona un usuario</option> 
-					      </select>
-					    </div>
 
 					</div>
 					<div class="row m-4"></div>
@@ -51,9 +53,9 @@
 					</div>
 					<div class="col">
 						<?php if(isset($editable) && $editable != false){ ?>
-							<button class="form-control btn btn-outline-primary btn-sm btn-update" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
-						<?php }else{ ?>
 							<button class="form-control btn btn-outline-primary btn-sm btn-add" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
+						<?php }else{ ?>
+ 
 						<?php } ?>
 						<div class="row mt-2"></div>
 						<!-- <button class="form-control btn btn-outline-primary btn-sm" type="button">EXPORTAR A EXCEL <i class="fa-solid fa-file-export"></i></button> -->
@@ -74,6 +76,7 @@
 		<a href="http://localhost/inventario/controlador/productos">productos</a>
 		<a href="http://localhost/inventario/controlador/reportes">Reportes</a>
 	</div> -->
-	
+ 
+
 
 </div>

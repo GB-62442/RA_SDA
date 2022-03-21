@@ -117,7 +117,6 @@ class Controlador extends CI_Controller{
 		$this->load->view( "public/componentes/footer_f");
 
 	}
-	
 
 	public function detalleproducto(){
 
@@ -148,6 +147,164 @@ class Controlador extends CI_Controller{
 
 	}
 
+	public function mermaproducto(){
+
+		$data['scripts'][]          = 'app/private/modules/f_mermaproducto';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/forma_merma_productos", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}
+
+
+	public function historialmermaproducto(){
+
+		$data['scripts'][]          = 'app/private/modules/f_hmermaproducto';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/historico_merma_productos", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}	
+
+	public function compraproducto(){
+
+		$data['scripts'][]          = 'app/private/modules/f_compraproducto';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/forma_compra_productos", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}	
+
+	public function usuarios(){
+		$data['scripts'][]          = 'app/private/modules/usuarios';
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/usuarios", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}
+
+	public function detalleusuario(){
+
+		$data['scripts'][]          = 'app/private/modules/f_usuario';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/forma_usuarios", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}
+
+	public function historialsesiones(){
+
+		$data['scripts'][]          = 'app/private/modules/f_hsesiones';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+
+	        	$this->load->model('Usuario_model');
+
+	        	$data['res']					= $this->Usuario_model->getSesionesById($post_id);	
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/historico_sesion", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}	
 
 	public function proveedores(){
 

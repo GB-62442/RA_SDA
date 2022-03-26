@@ -96,8 +96,9 @@ class Controlador extends CI_Controller{
 	}	
 
 	public function recetas(){
+		$data['scripts'][]          = 'app/private/modules/recetas';
 		$this->load->view( "public/componentes/header_f" );
-		$this->load->view( "public/private/recetas" );
+		$this->load->view( "public/private/recetas", $data );
 		$this->load->view( "public/componentes/footer_f");
 
 	}

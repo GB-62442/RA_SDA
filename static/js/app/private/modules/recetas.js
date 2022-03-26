@@ -1,11 +1,10 @@
-
+recetaDatos();
 function recetaDatos(){
 	$.ajax({
 		"url"     : base_url() + "Recetas/getAll",
 		"type"    : "post",
 		"dataType"     : "json",
 		"success"      : function( json ) {
-			return json.respuesta;
 			console.log(json.respuesta);
 			
 		},

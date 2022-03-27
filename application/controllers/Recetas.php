@@ -9,7 +9,8 @@ class Recetas extends CI_Controller{
 
 	public function getAll(){
 		//if($this->session->userdata('login') == true){
-			$res = $this->Recetas_model->getAll();
+			$res = $this->Recetas_model->getAll(1);
+			//$res = $this->Recetas_model->getAll();
 
 			if($res != NULL){
 				$respuesta = array();

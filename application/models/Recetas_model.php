@@ -3,10 +3,11 @@ defined('BASEPATH') OR exit('No se permite el acceso directo.');
 
 class Recetas_model extends CI_Model{
 
-    public function getAll(){
-        $cmd = "SELECT * FROM receta";
+    public function getAll($idPuntoVenta){
+        $cmdReceta = 'SELECT receta.idReceta, receta.nombre, receta.precioVenta, receta.presentacion,insumo.idInsumo, insumoreceta.cantidad, puntoVenta.idPuntoVenta from receta, insumoreceta, insumo, puntoventainsumo, puntoventa where receta.idReceta = insumoreceta.idReceta AND insumo.idInsumo = insumoreceta.idInsumo and insumo.idInsumo = puntoventainsumo.idInsumo AND "'.$idPuntoVenta.'" = puntoventainsumo.idPuntoVenta';
 
-        $query = $this->db->query($cmd);
+        $query = $this->db->query($cmdReceta);
+
         return $query->num_rows() != 0 ? $query->result() : NULL;
     }
     public function insert($data){

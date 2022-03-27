@@ -25,5 +25,13 @@ class Acceso_model extends CI_Model{
 		}
 	}
 
+	public function getPuntosVenta($idUsuario){
+		$cmd = 'select idPuntoVenta from puntoventa, usuario WHERE puntoventa.idUsuario ='.$idUsuario;
+
+        $query = $this->db->query($cmd);
+
+        return $query->num_rows() != 0 ? $query->result() : NULL;
+	}
+
 }
 ?>

@@ -9,108 +9,54 @@ class Merma extends CI_Controller{
 
 	public function getAll(){
 		//if($this->session->userdata('login') == true){
+
+			$respuesta = array();
+			$respuesta['resultado'] = 'false';
+			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
+			$respuesta['respuesta'] = null;
+
 			$res = $this->Merma_model->getAll();
 
 			if($res != NULL){
-				$respuesta = array();
 				$respuesta['resultado'] = 'true';
 				$respuesta['mensaje'] = 'Registros obtenidos con éxito';
 				$respuesta['respuesta'] = $res;
-				echo json_encode($respuesta);
 			}
-			else{
-				$respuesta = array();
-				$respuesta['resultado'] = 'false';
-				$respuesta['mensaje'] = 'Hubo un error al obtener los registros';
-				echo json_encode($respuesta);
-			}
-
+			
+			echo json_encode($respuesta);
 		//}
 	}
 
 	public function insert(){
 		//if($this->session->userdata('login') == true){
-			$this->form_validation->set_rules('fecha', 'fecha', 'required|htmlspecialchars|trim');
-			$this->form_validation->set_rules('cantidad', 'cantidad', 'required|htmlspecialchars|trim');
-			$this->form_validation->set_rules('idInsumo', 'idInsumo', 'required|htmlspecialchars|trim');
-			if($this->form_validation->run()){
-				$fecha = $this->input->post("fecha");
-				$cantidad  = $this->input->post("cantidad");
-				$idInsumo = $this->input->post("idInsumo");
+
+			$respuesta = array();
+			$respuesta['resultado'] = 'false';
+			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
+			$respuesta['respuesta'] = null;
+
+			$this->form_validation->set_rules('idInsumo', 'id del insumo', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
+			$this->form_validation->set_rules('cantidad', 'cantidad de la merma', 'required|numeric|greater_than[0]|trim');
+
+			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
+				$idInsumo 	= $this->input->post("idInsumo");
+				$cantidad 	= $this->input->post("cantidad");
 
 				$data = array(
-					"fecha" => $fecha,
-					"cantidad" => $cantidad,
-					"idInsumo" => $idInsumo
+					"idInsumo" 	=> $idInsumo,
+					"cantidad" 	=> $cantidad,
 				);
 
-				$mermaInsumo = $this->Merma_model->insert($data);
+				$is_affected = $this->Merma_model->insert($data);
 
-				if($mermaInsumo != NULL){
-					$respuesta = array();
+				if($is_affected != NULL){
 					$respuesta['resultado'] = 'true';
 					$respuesta['mensaje'] = 'El registro se insertó correctamente';
-					echo json_encode($respuesta);
-				}
-				else{
-					$respuesta = array();
-					$respuesta['resultado'] = 'false';
-					$respuesta['mensaje'] = 'Hubo un error al insertar el registro';
-					echo json_encode($respuesta);
-				}
-			}
-			else{
-				$this->form_validation->set_error_delimiters('','');
-				$respuesta = array();
-				$respuesta['resultado'] = 'false';
-				$respuesta['mensaje'] = validation_errors();
-				echo json_encode($respuesta);
-			}
-		//}
-	}
-
-	public function edit(){
-		//if($this->session->userdata('login') == true){
-
-			$respuesta = array();
-			$respuesta['resultado'] = 'false';
-			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
-			$respuesta['respuesta'] = null;
-
-			$this->form_validation->set_rules('idInsumo', 'idInsumo', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required');
-			$this->form_validation->set_rules('fecha', 'fecha', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required');
-			$this->form_validation->set_rules('cantidad', 'cantidad', 'required|htmlspecialchars|max_length[50]|trim');
-			
-
-			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
-				$idInsumo   	= $this->input->post("idInsumo");
-				$fecha 	= $this->input->post("fecha");
-				$cantidad    = $this->input->post("cantidad");
-
-				//revisar que exista el registro
-				$res = $this->Merma_model->getById($idInsumo); 
-
-				if($res != NULL){
-					$data = array(
-						"fecha"  => $fecha,
-						"idInsumo"   => $idInsumo,
-						"cantidad" 		=> $cantidad
-					);
-
-					$is_affected = $this->Merma_model->update($data, $idInsumo);
-
-					if($is_affected != NULL){
-						$respuesta['resultado'] = 'true';
-						$respuesta['mensaje'] = 'El registro se actualizó correctamente';
-					}else{
-						$respuesta['mensaje'] = 'No fue posible modificar el registro';
-					}
-
 				}
 
 			}
 
-            /Si la validación de campos es incorrecta/
+            /*Si la validación de campos es incorrecta*/
             else {
             	$this->form_validation->set_error_delimiters('','');
 				$respuesta['error'] = validation_errors();
@@ -121,46 +67,34 @@ class Merma extends CI_Controller{
 		//}
 	}
 
-	public function delete(){
+
+	public function tabla(){
 		//if($this->session->userdata('login') == true){
+		$data['res'] = null; 
 
-			$respuesta = array();
-			$respuesta['resultado'] = 'false';
-			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
-			$respuesta['respuesta'] = null;
-
-			$this->form_validation->set_rules('idInsumo', 'idInsumo', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required');
+			$this->form_validation->set_data($_GET)->set_rules('id', 'id del insumo', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
 
 			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
-				$idInsumo		= $this->input->post("idInsumo");
+				$id 	= $this->input->get("id");
 
-				//revisar que exista el registro
-				$res = $this->Merma_model->getById($idInsumo); 
+				$data = array(
+					"id" 	=> $id,
+				);
 
-				if($res != NULL){
+				$data['res'] = $this->Merma_model->getById($id); 
 
-					$is_affected = $this->Merma_model->deleteById($idInsumo);
+			} 
 
-					if($is_affected != NULL){
-						$respuesta['resultado'] = 'true';
-						$respuesta['mensaje'] = 'El registro se elimino correctamente';
-					}else{
-						$respuesta['mensaje'] = 'No fue posible eliminar el registro';
-					}
-
-				}
-
-			}
-
-            /Si la validación de campos es incorrecta/
-            else {
-            	$this->form_validation->set_error_delimiters('','');
-				$respuesta['error'] = validation_errors();
-            }
-			
-            echo json_encode($respuesta);
-
+        	$html = $this->load->view('public/private/tabla_MermaInsumo', $data, true);
+        	echo $html; 				
+            
 		//}
 	}
+
+
+	
+
+		
+
 }
 ?>

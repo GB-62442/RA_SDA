@@ -4,45 +4,24 @@ defined('BASEPATH') OR exit('No se permite el acceso directo.');
 class Merma_model extends CI_Model{
 
 	public function getAll(){
-		$this->db->join('idInsumo', 'insumo.idInsumo = mermaInsumo.idInsumo');
-		$rs = $this->db->get('mermaInsumo');
+		$this->db->select('idInsumo, unidadMedida, insumo.nombre as nombreinsumo, insumo.idProveedor, proveedor.nombre as nombreproveedor from insumo left join proveedor on proveedor.idProveedor = insumo.idProveedor', FALSE);
+
+		$rs = $this->db->get();
+
 		return $rs->num_rows() > 0 ? $rs->result() : NULL;
 	}
 
 	public function insert($data){
-		return $this->db->insert('mermaInsumo', $data) ? true : NULL;
+		return $this->db->insert('mermainsumo', $data) ? true : NULL;
 	}
 
-	public function getById($id)
+ 	public function getById($id)
     {
-        $cmd = "SELECT * FROM mermaInsumo where idInsumo  = ".$id;
+        $cmd = "SELECT insumo.idInsumo, insumo.nombre as nombreinsumo, insumo.unidadMedida, proveedor.idProveedor, proveedor.nombre as nombreproveedor, fecha, cantidad FROM mermainsumo inner join insumo on mermainsumo.idInsumo=insumo.idInsumo inner join proveedor on proveedor.idProveedor= insumo.idProveedor where insumo.idInsumo  = ".$id;
 
         $query = $this->db->query($cmd);
-        return ($query->num_rows() == 1) ? $query->row() : NULL;
+		return $query->num_rows() > 0 ? $query->result() : NULL;
     }
 
-	public function update($entry, $idInsumo)
-    {
-        try {
-            $this->db->set($entry);
-            $this->db->where('idInsumo', $idInsumo);
-            $this->db->update('v');
-
-            return ($idInsumo) ? TRUE : NULL;
-        }
-
-        catch(Exception $e) {
-            return $e->getMessage();
-        }
-		
-    }	
-
-	public function deleteById($id)
-    {
-        $cmd = "DELETE FROM mermaInsumo where idInsumo = ".$id;
-
-        $query = $this->db->query($cmd);
-        return (TRUE) ? TRUE : NULL;
-    }
      
 }

@@ -18,5 +18,12 @@ class CompraInsu_model extends CI_Model{
 	public function insertpv($data){
 		return $this->db->insert('puntoventainsumo', $data) ? true : NULL;
 	}     
-}
 
+	public function getById($id)
+    {
+        $cmd = "SELECT insumo.idInsumo, insumo.nombre as nombreinsumo, proveedor.idProveedor, proveedor.nombre as nombreproveedor, fecha, cantidad FROM comprasinsumo inner join insumo on comprasinsumo.idInsumo=insumo.idInsumo inner join proveedor on proveedor.idProveedor= insumo.idProveedor where insumo.idInsumo  = ".$id;
+
+        $query = $this->db->query($cmd);
+		return $query->num_rows() > 0 ? $query->result() : NULL;
+    }
+}

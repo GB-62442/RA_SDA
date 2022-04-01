@@ -83,11 +83,23 @@ class CompraInsumo extends CI_Controller{
 
 	public function tabla(){
 		//if($this->session->userdata('login') == true){
-            
-        $data['res'] = $this->CompraInsu_model->getAll(); 
+		$data['res'] = null; 
 
-        $html = $this->load->view('public/private/tabla_MermaInsu', $data, true);
-        echo $html; 				
+			$this->form_validation->set_data($_GET)->set_rules('id', 'id del insumo', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
+
+			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
+				$id 	= $this->input->get("id");
+
+				$data = array(
+					"id" 	=> $id,
+				);
+
+				$data['res'] = $this->CompraInsu_model->getById($id); 
+
+			} 
+
+        	$html = $this->load->view('public/private/tabla_CompraInsumo', $data, true);
+        	echo $html; 				
             
 		//}
 	}

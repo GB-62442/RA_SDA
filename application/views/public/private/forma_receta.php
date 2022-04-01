@@ -22,15 +22,23 @@
 					<div class="col-12">
 					    <div class="form-group">
 					      <label for="exampleInputEmail1" class="form-label mt-4">Nombre</label>
-					      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre de la receta">
-					      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+					      <input type="text" class="form-control" id="nombre_receta"  placeholder="Nombre de la receta">
 					    </div>
+
+					    <div class="form-group col-md-6 col-sm-12">
+                    		<label for="exampleSelect2" class="form-label mt-4">Tipo de presentación</label>
+                    		<select class="form-select" id="select_presentacion">
+                    			<option value="grm">gramos</option>
+                    			<option value="ml">mililitros</option>
+                    		</select>
+                		</div>
+
 
 
 					    <div class="form-group">
 					      <label for="exampleInputEmail1" class="form-label mt-4">Precio de venta</label>
-					      <input type="number" step="0.1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Precio de venta">
-					      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+					      <input type="number" step="0.1" value="0" class="form-control" id="precio_venta" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Precio de venta">
+					      
 					    </div>					    
 
 
@@ -39,74 +47,14 @@
 								<div class="col-10">
 								</div>
 								<div class="col">
-									<button class="form-control btn btn-info btn-sm rounded-pill" type="button">AGREGAR INGREDIENTE <i class="fa-solid fa-chart-simple"></i></button>
+									<button onclick="agregarIngrediente()" class="form-control btn btn-info btn-sm rounded-pill" type="button">AGREGAR INGREDIENTE <i class="fa-solid fa-chart-simple"></i></button>
 									<div class="row mt-2"></div>
 									<!-- <button class="form-control btn btn-outline-primary btn-sm" type="button">EXPORTAR A EXCEL <i class="fa-solid fa-file-export"></i></button> -->
 								</div>
 							</div>
 
-					    <div class="row">
-						    <div class="form-group col-md-6 col-sm-12">
-						      <label for="exampleSelect2" class="form-label mt-4">Ingrediente</label>
-						      <select class="form-select" id="exampleSelect2">
-						        <option value="lts">Litro (lts.)</option>
-						        <option value="ml">Mililitro (ml.)</option>
-						        <option value="cc">Centímetros cúbicos (c.c.)</option>
-						        <option value="kg">Kilogramos(kg.)</option>
-						        <option value="gr">Gramos (gr.)</option>
-						        <option value="lb">Libra (lb.)</option>
-						        <option value="oz">Onza (oz.)</option>
-						      </select>
-						    </div>
-
-						    <!--  -->
-
-						    <div class="row col-md-6 col-sm-12">
-						    <div class="form-group col-md-8">
-						      <label for="exampleInputEmail1" class="form-label mt-4">Cantidad</label>
-						      <input type="number" step="0.1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cantidad">
-						      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						    </div>	
-						    <div class="form-group col-md-4">
-						    	<label for="exampleInputEmail1" class="form-label mt-4">Eliminar ingrediente</label>
-						      <button class="form-control btn btn-dark btn-sm" type="button"><i class="fa-solid fa-xmark fa-2x"></i></button>
-						    </div>	
-
-
-						    </div>
-
-						</div>
-
-					    <div class="row">
-						    <div class="form-group col-md-6 col-sm-12">
-						      <label for="exampleSelect2" class="form-label mt-4">Ingrediente</label>
-						      <select class="form-select" id="exampleSelect2">
-						        <option value="lts">Litro (lts.)</option>
-						        <option value="ml">Mililitro (ml.)</option>
-						        <option value="cc">Centímetros cúbicos (c.c.)</option>
-						        <option value="kg">Kilogramos(kg.)</option>
-						        <option value="gr">Gramos (gr.)</option>
-						        <option value="lb">Libra (lb.)</option>
-						        <option value="oz">Onza (oz.)</option>
-						      </select>
-						    </div>
-
-						    <!--  -->
-
-						    <div class="row col-md-6 col-sm-12">
-						    <div class="form-group col-md-8">
-						      <label for="exampleInputEmail1" class="form-label mt-4">Cantidad</label>
-						      <input type="number" step="0.1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cantidad">
-						      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						    </div>	
-						    <div class="form-group col-md-4">
-						    	<label for="exampleInputEmail1" class="form-label mt-4">Eliminar ingrediente</label>
-						      <button class="form-control btn btn-dark btn-sm" type="button"><i class="fa-solid fa-xmark fa-2x"></i></button>
-						    </div>	
-
-
-						    </div>
-
+						<!--SELECT INSUMO-->	
+						<div id="insumo_formato">
 						</div>
 
 
@@ -117,7 +65,7 @@
 					<div class="col">
 					</div>
 					<div class="col">
-						<button class="form-control btn btn-outline-primary btn-sm" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
+						<button class="form-control btn btn-outline-primary btn-sm" onclick="registrarReceta()" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
 						<div class="row mt-2"></div>
 						<!-- <button class="form-control btn btn-outline-primary btn-sm" type="button">EXPORTAR A EXCEL <i class="fa-solid fa-file-export"></i></button> -->
 					</div>

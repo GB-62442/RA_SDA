@@ -10,6 +10,18 @@ class Recetas_model extends CI_Model{
 
         return $query->num_rows() != 0 ? $query->result() : NULL;
     }
+
+    public function getInsumos($idPuntoVenta){
+        $cmdInsumo = 'SELECT insumo.idInsumo, insumo.nombre, insumo.unidadMedida from receta, insumoreceta, insumo, puntoventainsumo, puntoventa where receta.idReceta = insumoreceta.idReceta AND insumo.idInsumo = insumoreceta.idInsumo and insumo.idInsumo = puntoventainsumo.idInsumo AND "'.$idPuntoVenta.'" = puntoventainsumo.idPuntoVenta GROUP BY idInsumo';
+        $query = $this->db->query($cmdInsumo);
+        return $query->num_rows() != 0 ? $query->result() : NULL;
+    }
+
+    public function insertarReceta($nombre, $precioVenta, $presentacion){
+        $cmdReceta = 'INSERT INTO receta values(null,"'.$nombre.'","'.$precioVenta.'","'.$presentacion.'")';
+        $this->db->query($cmdReceta);
+    }
+
     public function insert($data){
         return $this->db->insert('receta', $data) ? true : NULL;
     }

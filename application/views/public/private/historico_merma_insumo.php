@@ -1,4 +1,3 @@
- 
 <div class="container-fluid mt-4 pt-2 col-12">
 
 	<div class="page-header" id="banner">
@@ -57,7 +56,7 @@
 
 			<div class="row m-2">
 				<div class="table-responsive">
-					<div id="tabla-datos"></div>			
+					<div id="tabla-datosinsu"></div>			
 	 			</div>
 			</div>
 		<?php }else{ ?>

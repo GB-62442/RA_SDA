@@ -94,6 +94,123 @@ class Controlador extends CI_Controller{
 		$this->load->view( "public/componentes/footer_f");
 
 	}	
+	
+	public function mermainsumo(){
+
+		$data['scripts'][]          = 'app/private/modules/f_mermainsumo';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/forma_merma_insumo", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}
+
+
+	public function historialmermainsumo(){
+
+		$data['scripts'][]          = 'app/private/modules/f_hmermainsumo';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/historico_merma_insumo", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}	
+
+	public function comprainsumo(){
+
+		$data['scripts'][]          = 'app/private/modules/f_comprainsumo';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/forma_compra_insumo", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}	
+
+	public function historialcomprainsumo(){
+
+		$data['scripts'][]          = 'app/private/modules/f_hcomprainsumo';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/historico_compra_insumo", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}
 
 	public function recetas(){
 		$data['scripts'][]          = 'app/private/modules/recetas';

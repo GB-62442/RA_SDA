@@ -78,6 +78,7 @@ jQuery(document).ready(function ($) {
 
 				if (json.resultado == 'true') {
 					alert('Registro completo');
+					window.location = base_url() + "controlador/insumos";
 				} else {
 					alert('Ocurrió un error, por favor vuelva a intentarlo');
 				}
@@ -107,6 +108,7 @@ jQuery(document).ready(function ($) {
 console.log(json);
 				if (json.resultado == 'true') {
 					alert('Registro completo');
+					window.location = base_url() + "controlador/insumos";
 				} else {
 					alert('Ocurrió un error, por favor vuelva a intentarlo');
 				}

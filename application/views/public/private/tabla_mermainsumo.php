@@ -1,4 +1,4 @@
-		<!-- table -->
+ 		<!-- table -->
 				<table class="table table-hover table-sm table-bordered">
 				  <thead class="table-dark">
 				    <tr>
@@ -10,7 +10,7 @@
 				      <th scope="col">FECHA</th>
 				    </tr>
 				  </thead>
-				  <tbody id="tabla-datos">
+				  <tbody id="tabla-datosinsu">
 				  	<?php 
 				  	if(isset($res) && !is_null($res)){
 					  	foreach ($res as $r) { ?>

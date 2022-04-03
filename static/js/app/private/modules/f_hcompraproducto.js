@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-	console.log('en -  f_hmermaproducto.js');
+	console.log('en -  f_hcompraproducto.js');
  
 		console.log('ready!');
 
@@ -47,7 +47,7 @@ jQuery(document).ready(function ($) {
 				},
 			}); 
 
-			$('#tabla-datos').load(base_url() + 'mermaproducto/tabla?id=' + $('#id_registro').val());
+			$('#tabla-datos').load(base_url() + 'compraproducto/tabla?id=' + $('#id_registro').val());
 /*			console.log(base_url() + 'mermaproducto/tabla?id=' + $('#id_registro').val());*/
  		 }
 
@@ -61,7 +61,7 @@ jQuery(document).ready(function ($) {
  	+ '&fin=' +$('#final').val());
 */
 
- $('#tabla-datos').load(base_url() + 'mermaproducto/tabla?id=' 
+ $('#tabla-datos').load(base_url() + 'compraproducto/tabla?id=' 
  	+ $('#id_registro').val() 
  	+ '&inicio='+ $('#inicio').val() 
  	+ '&fin=' +$('#final').val());
@@ -71,7 +71,7 @@ jQuery(document).ready(function ($) {
 
 	$(document).on('click', '.btn-export', function (event) {
 		event.preventDefault();
-		window.open(base_url() + 'mermaproducto/exportCSV?id=' 
+		window.open(base_url() + 'compraproducto/exportCSV?id=' 
  	+ $('#id_registro').val() 
  	+ '&inicio='+ $('#inicio').val() 
  	+ '&fin=' +$('#final').val());

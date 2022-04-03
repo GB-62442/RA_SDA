@@ -3,7 +3,7 @@
 
 	<div class="page-header" id="banner">
 
-		<h1>Historial sesiones</h1>
+		<h1>Historial compra productos</h1>
 	</div>
 	
 
@@ -55,7 +55,6 @@
 				</div>
 			</div>
 
-
 			<div class="row m-2">
 				<div class="form-group col-md-2">
 					<label for="inicio" class="form-label mt-4">Fecha inicio</label>
@@ -73,44 +72,19 @@
 					<button class="btn btn-dark form-control btn-search" id="buscar">Buscar</button>
 							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
 				</div>
-			
+
+
+				<div class="form-group col-md-2">
+					<label for="final" class="form-label text-light mt-4"> .</label>
+					<button class="btn btn btn-primary form-control btn-export" id="exportar">Exportar</button>
+							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
+				</div>				
 
 			</div>
 
 			<div class="row m-2">
 				<div class="table-responsive">
-					
- 		<!-- table -->
-				<table class="table table-hover table-sm table-bordered">
-				  <thead class="table-dark">
-				    <tr>
- 				      <th scope="col">NOMBRE</th>
-				      <th scope="col">ROL</th>
-				      <th scope="col">RESULTADO</th>
-				      <th scope="col">FECHA</th>
-				    </tr>
-				  </thead>
-				  <tbody id="tabla-datos">
-				  	<?php 
-
-				  	if(isset($res) && !is_null($res)){
-					  	foreach ($res as $r) { ?>
-					    <tr>
- 					      <td><?php echo($r->nombre) ?></td>
-					      <td><?php echo($r->rol) ?></td>
-					      <td><?php echo $r->resultado ? 'Exitoso' : 'Fallido'; ?></td>
-					      <td><?php echo($r->fecha) ?></td>
-					    </tr> 
-					  	<?php
-					  	}
-				  	}
-
-				  	?>
-
-				  </tbody>
-				</table>
- 		<!-- ./table -->					
-
+					<div id="tabla-datos"></div>			
 	 			</div>
 			</div>
 		<?php }else{ ?>

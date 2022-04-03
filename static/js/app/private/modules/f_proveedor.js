@@ -49,7 +49,8 @@ jQuery(document).ready(function ($) {
  				console.log(json.mensaje);
 
 				if (json.resultado == 'true') {
-					alert(json.mensaje);
+					alert(json.mensaje); 
+					window.location = base_url() + 'controlador/proveedores';
 				} else {
 					alert('Ocurrió un error, por favor vuelva a intentarlo');
 				}
@@ -78,7 +79,8 @@ jQuery(document).ready(function ($) {
 				console.log(json);
 
 				if (json.resultado == 'true') {
-					alert(json.mensaje);
+					alert(json.mensaje); 
+					window.location = base_url() + 'controlador/proveedores';
 				} else {
 					alert('Ocurrió un error, por favor vuelva a intentarlo');
 				}

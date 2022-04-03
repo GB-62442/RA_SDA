@@ -76,12 +76,16 @@ class MermaProducto extends CI_Controller{
 
 			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
 				$id 	= $this->input->get("id");
+				$inicio = $this->input->get("inicio");
+				$fin 	= $this->input->get("fin");
 
 				$data = array(
 					"id" 	=> $id,
+					"inicio"=> $inicio,
+					"fin"	=> $fin,
 				);
 
-				$data['res'] = $this->MermaProd_model->getById($id); 
+				$data['res'] = $this->MermaProd_model->getById($id, $inicio, $fin); 
 
 			} 
 
@@ -90,6 +94,70 @@ class MermaProducto extends CI_Controller{
             
 		//}
 	}
+
+
+
+  public function exportCSV(){ 
+   // file name 
+
+	$this->form_validation->set_data($_GET)->set_rules('id', 'id del producto', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
+
+
+	if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
+		$id 	= $this->input->get("id");
+		$inicio = $this->input->get("inicio");
+		$fin 	= $this->input->get("fin");
+
+		$data = array(
+			"id" 	=> $id,
+			"inicio"=> $inicio,
+			"fin"	=> $fin,
+		);
+
+   		$filename = 'MermasProducto'.date('Ymd').'('.$inicio.'-'.$fin.').csv'; 
+   		header("Content-Description: File Transfer"); 
+   		header("Content-Disposition: attachment; filename=$filename"); 
+   		header("Content-Type: application/csv; ");
+   
+   // get data 
+   		$resultData = $this->MermaProd_model->getById($id, $inicio, $fin);
+
+   		// file creation 
+   		$file = fopen('php://output', 'w');
+ 
+   		$col_names = array(
+   			"idProducto",
+   			"nombreproducto",
+   			"unidadMedida",
+   			"idProveedor",
+   			"nombreproveedor",
+   			"fecha",
+   			"cantidad"
+   		); 
+
+     	fputcsv($file, array_values($col_names), ';', ' ');
+   		foreach ($resultData as $row){
+   		 $temp = array(
+   		 	$row->idProducto,
+   		 	$row->nombreproducto, 
+   		 	$row->unidadMedida, 
+   		 	$row->idProveedor,
+   		 	$row->nombreproveedor,
+   		 	$row->fecha,
+   		 	$row->cantidad,
+   		 );
+
+     		fputcsv($file, array_values($temp), ';', ' ');
+
+   		}
+
+   		fclose($file); 
+   		exit; 
+
+	} 
+ 
+
+  }
 
 
 }

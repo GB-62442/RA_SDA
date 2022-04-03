@@ -24,7 +24,7 @@
 						<?php if(isset($editable) && $editable != false){ ?>
 					    <div class="form-group">
 					      <label for="id_registro" class="form-label mt-4">ID</label>
-					      <input type="text" class="form-control" id="id_registro" aria-describedby="emailHelp" placeholder="ID del proveedor" value="<?php if(isset($id)) echo($id); ?>">
+					      <input type="text" class="form-control" id="id_registro" aria-describedby="emailHelp" placeholder="ID del proveedor" value="<?php if(isset($id)) echo($id); ?>" readonly>
 						</div>
 						<?php }else{ ?>
 
@@ -44,9 +44,9 @@
 					</div>
 					<div class="col">
 						<?php if(isset($editable) && $editable != false){ ?>
-							<button class="form-control btn btn-outline-primary btn-sm btn-update" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
+							<button class="form-control btn btn-outline-primary btn-sm btn-update" type="button">GUARDAR <i class="fa-solid fa-floppy-disk"></i></button>
 						<?php }else{ ?>
-							<button class="form-control btn btn-outline-primary btn-sm btn-add" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
+							<button class="form-control btn btn-outline-primary btn-sm btn-add" type="button">GUARDAR <i class="fa-solid fa-floppy-disk"></i></button>
 						<?php } ?>
 						<div class="row mt-2"></div>
 						<!-- <button class="form-control btn btn-outline-primary btn-sm" type="button">EXPORTAR A EXCEL <i class="fa-solid fa-file-export"></i></button> -->

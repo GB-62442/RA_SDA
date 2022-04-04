@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No se permite el acceso directo.');
 class Recetas_model extends CI_Model{
 
     public function getAll($idPuntoVenta){
-        $cmdReceta = 'select receta.idReceta, receta.nombre, receta.precioVenta, receta.presentacion, insumo.idInsumo, insumoreceta.cantidad, puntoventa.idPuntoVenta from receta, insumoreceta, insumo, puntoventainsumo, puntoventa where receta.idReceta = insumoreceta.idReceta AND insumo.idInsumo = insumoreceta.idInsumo and insumo.idInsumo = puntoventainsumo.idInsumo AND "'.$idPuntoVenta.'" = puntoventainsumo.idPuntoVenta order by idReceta';
+        $cmdReceta = 'select receta.idReceta, receta.nombre, receta.precioVenta, receta.presentacion, insumo.idInsumo, insumoreceta.cantidad, puntoventa.idPuntoVenta from receta, insumoreceta, insumo, puntoventainsumo, puntoventa where receta.idReceta = insumoreceta.idReceta AND insumo.idInsumo = insumoreceta.idInsumo and insumo.idInsumo = puntoventainsumo.idInsumo AND "'.$idPuntoVenta.'" = puntoventainsumo.idPuntoVenta AND puntoventa.idPuntoVenta = "'.$idPuntoVenta.'" order by idReceta;';
 
         $query = $this->db->query($cmdReceta);
 
@@ -55,6 +55,14 @@ class Recetas_model extends CI_Model{
             $this->db->query($insumoRecetaQuery);
         }
         
+    }
+
+    public function eliminarReceta($id_receta){
+        $cmdInsumosReceta = 'DELETE FROM insumoreceta WHERE idReceta ='.$id_receta;
+        $this->db->query($cmdInsumosReceta);
+
+        $cmdReceta = 'DELETE FROM receta WHERE idReceta ='.$id_receta;
+        $this->db->query($cmdReceta);
     }
      
 }

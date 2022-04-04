@@ -15,7 +15,7 @@ var opcion;
 
 //comprobamos si vamos a editar o registrar datos
 if (isNaN(parseFloat(id_receta))) {
-	console.log('hola desde registrar receta');
+	//REGISTRAR DATOS
     insumosFormatos = 1;
 
 
@@ -23,7 +23,7 @@ if (isNaN(parseFloat(id_receta))) {
     opcion = 0;
 
 }else{
-
+    //ACTUALIZAR DATOS
     obtenerReceta();
     
     opcion = 1;
@@ -31,6 +31,8 @@ if (isNaN(parseFloat(id_receta))) {
     
 
 }
+
+//Funciones para pintar y hacer cosas aca cool ya sabes :b
 
 function agregarIngrediente(){
     arreglo_insumo_pintar=[];
@@ -202,6 +204,7 @@ function actualizarRegistrarReceta(){
             "dataType"     : "json",
             "success"      : function( json ) {
             alert('Registro exitoso jaja saludos');
+            window.location.href = "http://localhost/inventario/controlador/recetas";
         },
         error: function (ts) {
             console.log(ts.responseText);

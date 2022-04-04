@@ -94,7 +94,12 @@ class Recetas extends CI_Controller{
 		$arreglo_insumo = $this->input->post("arreglo_insumo");
 		$arreglo_cantidad = $this->input->post("arreglo_cantidad");
 		$res = $this->Recetas_model->actualizarReceta( $id_receta, $nombre, $precioVenta, $presentacion, $arreglo_insumo, $arreglo_cantidad);
-}
+	}
+
+	public function eliminarReceta(){
+		$id_receta 		= $this->input->post("id_receta"); 
+		$res = $this->Recetas_model->eliminarReceta($id_receta);
+	}
 
 }
 ?>

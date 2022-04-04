@@ -22,7 +22,7 @@ class CompraProd_model extends CI_Model{
 
  	public function getById($id, $inicio, $final)
     {
-        $cmd = "SELECT producto.idProducto, producto.nombre as nombreproducto, producto.unidadMedida, precioVenta, proveedor.idProveedor, proveedor.nombre as nombreproveedor, fecha, comprasproducto.cantidad, comprasproducto.precio as costo FROM comprasproducto inner join producto on comprasproducto.idProducto=producto.idProducto inner join puntoventaproducto on puntoventaproducto.idProducto= producto.idProducto inner join proveedor on proveedor.idProveedor= producto.idProveedor where producto.idProducto  = ".$id;
+        $cmd = "SELECT DISTINCT producto.idProducto, producto.nombre as nombreproducto, producto.unidadMedida, precioVenta, proveedor.idProveedor, proveedor.nombre as nombreproveedor, fecha, comprasproducto.cantidad, comprasproducto.precio as costo FROM comprasproducto inner join producto on comprasproducto.idProducto=producto.idProducto inner join puntoventaproducto on puntoventaproducto.idProducto= producto.idProducto inner join proveedor on proveedor.idProveedor= producto.idProveedor where producto.idProducto  = ".$id;
 
         $busqueda = "";
         if($inicio!= null && $inicio != "" && $final != null && $final != ""){

@@ -20,7 +20,7 @@ class Acceso extends CI_Controller{
 			if($this->Acceso_model->login($email) != NULL){
 				$user = $this->Acceso_model->login($email);
 				//Si existe el correo y se recibe el usuario completo
-				if($user->pass == $password){
+				if($user->pass == md5($password)){
 						//La contraseña también coincide
 						$data = array(
 							'email' => $email,

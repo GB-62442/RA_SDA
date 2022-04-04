@@ -39,9 +39,16 @@
 								<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
 							</div>
 
+
+						    <div class="form-group">
+						      <label for="email" class="form-label mt-4">Correo</label>
+						      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Correo del usuario">
+								<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
+							</div>
+
 						    <div class="form-group">
 						      <label for="pwd" class="form-label mt-4">Contrasena</label>
-						      <input type="password" class="form-control" id="pwd" aria-describedby="emailHelp" placeholder="Contrasena">
+						      <input type="password" minlength="8" class="form-control" id="pwd" aria-describedby="emailHelp" placeholder="Contrasena">
 								<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
 							</div>
 

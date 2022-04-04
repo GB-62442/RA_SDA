@@ -15,7 +15,8 @@ jQuery(document).ready(function ($) {
 				dataType: 'json',
 				success: function (json) {
 					if (json.resultado == 'true') {
- 						$('#nombre').val(json.respuesta.nombre).change(); 				
+ 						$('#nombre').val(json.respuesta.nombre).change(); 	
+ 						$('#email').val(json.respuesta.email).change(); 			
 						$('#select_rol').val(json.respuesta.rol).change();
 					} else {
 						alert(json.mensaje);
@@ -42,6 +43,7 @@ jQuery(document).ready(function ($) {
 			type: 'post',
 			data: { 
 				nombre: 		$('#nombre').val(),
+				email: 			$('#email').val(),
 				rol: 			$('#select_rol').val(),
 				pass: 			$('#pwd').val(),
 				pass_r: 		$('#pwd_r').val(),
@@ -74,6 +76,7 @@ jQuery(document).ready(function ($) {
 			data: { 
 				idUsuario: 		$('#id_registro').val(),
 				nombre: 		$('#nombre').val(),
+				email: 			$('#email').val(),
 				rol: 			$('#select_rol').val(),
 				pass: 			$('#pwd').val(),
 				pass_r: 		$('#pwd_r').val(),

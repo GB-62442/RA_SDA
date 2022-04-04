@@ -189,13 +189,14 @@ class Usuario extends CI_Controller{
 				$nombre 		= $this->input->post("nombre");
 				$rol 		= $this->input->post("rol");
 				$pass 		= $this->input->post("pass");
-
+				$email		= $this->input->post("email");
 				$pass 		= md5($pass);
 
 				$data = array(
 					"nombre" 		=> $nombre,
 					"rol" 		=> $rol,
 					"pass" 		=> $pass,
+					"email"		=> $email,
 				);
 
 				$is_affected = $this->Usuario_model->insert($data);

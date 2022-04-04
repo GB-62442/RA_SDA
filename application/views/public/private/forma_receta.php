@@ -65,7 +65,7 @@
 					<div class="col">
 					</div>
 					<div class="col">
-						<button class="form-control btn btn-outline-primary btn-sm" onclick="registrarReceta()" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
+						<button class="form-control btn btn-outline-primary btn-sm" onclick="actualizarRegistrarReceta()" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
 						<div class="row mt-2"></div>
 						<!-- <button class="form-control btn btn-outline-primary btn-sm" type="button">EXPORTAR A EXCEL <i class="fa-solid fa-file-export"></i></button> -->
 					</div>

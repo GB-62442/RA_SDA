@@ -368,6 +368,36 @@ class Controlador extends CI_Controller{
 
 	}	
 
+
+	public function historialcompraproducto(){
+
+		$data['scripts'][]          = 'app/private/modules/f_hcompraproducto';
+		$data['editable'] 			= false;
+		$data['id']					= null;	
+   
+		if(!empty($this->input->get())){
+	        
+	        $post_id      	= $this->input->get('id');
+
+			$datos_get = array(
+				'id'	=> $post_id,
+			);
+	        $this->form_validation->set_data($datos_get)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
+
+	        if($this->form_validation->run()){
+	        	$data['editable'] 	= true;
+	        	$data['id']			= $datos_get['id'];
+	        }
+
+		} 
+	
+
+		$this->load->view( "public/componentes/header_f" );
+		$this->load->view( "public/private/historico_compra_productos", $data );
+		$this->load->view( "public/componentes/footer_f");
+
+	}	
+
 	public function usuarios(){
 		$data['scripts'][]          = 'app/private/modules/usuarios';
 
@@ -427,7 +457,7 @@ class Controlador extends CI_Controller{
 
 	        	$this->load->model('Usuario_model');
 
-	        	$data['res']					= $this->Usuario_model->getSesionesById($post_id);	
+	        	$data['res']					= $this->Usuario_model->getSesionesById($post_id, "", "");	
 	        }
 
 		} 

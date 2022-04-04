@@ -24,9 +24,10 @@
 					      	
 							<a href="<?=base_url('/controlador/detalleinsumo?id=')?><?php echo($r->idInsumo) ?>" type="button" class="btn btn-outline-dark btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
 							<button type="button" class="btn btn-outline-dark btn-sm btn-delete" data-info="<?php echo($r->idInsumo) ?>"><i class="fa-solid fa-trash"></i></button>
-							<button type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idInsumo) ?>"><i class="fa-solid fa-dollar-sign"></i></button>
-							<button type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idInsumo) ?>" >Merma</button>
-							<button type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idInsumo) ?>" >Historial Merma</button>
+							<a href="<?=base_url('/controlador/comprainsumo?id=')?><?php echo($r->idInsumo) ?>" type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idInsumo) ?>"><i class="fa-solid fa-dollar-sign"></i></a>
+							<a href="<?=base_url('/controlador/historialcomprainsumo?id=')?><?php echo($r->idInsumo) ?>" type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idInsumo) ?>" >Historial Compra</a>
+							<a href="<?=base_url('/controlador/mermainsumo?id=')?><?php echo($r->idInsumo) ?>" type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idInsumo) ?>" >Merma</a>
+							<a href="<?=base_url('/controlador/historialmermainsumo?id=')?><?php echo($r->idInsumo) ?>" type="button" class="btn btn-outline-dark btn-sm" data-info="<?php echo($r->idInsumo) ?>" >Historial Merma</a>
 
 					      </td>
 					    </tr> 

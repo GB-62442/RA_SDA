@@ -33,7 +33,7 @@
 					<!-- <button class="form-control btn btn-primary btn-sm" type="button">HISTORIAL <i class="fa-solid fa-chart-simple"></i></button> -->
 				</div>
 				<div class="col">
-					<a href="<?=base_url('/controlador/detalleproveedor')?>" class="form-control btn btn-primary btn-sm" type="button">AGREGAR <i class="fa-solid fa-chart-simple"></i></a>
+					<a href="<?=base_url('/controlador/detalleproveedor')?>" class="form-control btn btn-primary btn-sm" type="button">AGREGAR <i class="fa-solid fa-plus"></i></a>
 					<div class="row mt-2"></div>
 					<!-- <button class="form-control btn btn-outline-primary btn-sm" type="button">EXPORTAR A EXCEL <i class="fa-solid fa-file-export"></i></button> -->
 				</div>

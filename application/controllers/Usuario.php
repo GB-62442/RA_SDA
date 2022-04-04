@@ -79,7 +79,7 @@ class Usuario extends CI_Controller{
             $this->form_validation->set_data($datos_post)->set_rules('id', 'id', 'trim|integer|max_length[11]|greater_than_equal_to[1]|required'); 
 		
             if ($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/) {
-                 $res = $this->Usuario_model->getSesionesById($post_id); 
+                 $res = $this->Usuario_model->getSesionesById($post_id, $inicio, $fin); 
 
 				if($res != NULL){
 
@@ -103,6 +103,35 @@ class Usuario extends CI_Controller{
 		//}
 	}
 
+
+	public function tablasesiones(){
+		//if($this->session->userdata('login') == true){
+		$data['res'] = null; 
+
+			$this->form_validation->set_data($_GET)->set_rules('id', 'id del producto', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
+
+			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
+				$id 	= $this->input->get("id");
+				$inicio = $this->input->get("inicio");
+				$fin 	= $this->input->get("fin");
+
+				$data = array(
+					"id" 	=> $id,
+					"inicio"=> $inicio,
+					"fin"	=> $fin,
+				);
+
+				$data['res'] = $this->Usuario_model->getSesionesById($id, $inicio, $fin); 
+
+			} 
+
+        	$html = $this->load->view('public/private/tabla_sesiones', $data, true);
+        	echo $html; 				
+            
+		//}
+	}
+
+
 	public function insert(){
 		//if($this->session->userdata('login') == true){
 
@@ -120,6 +149,8 @@ class Usuario extends CI_Controller{
 				$nombre 		= $this->input->post("nombre");
 				$rol 		= $this->input->post("rol");
 				$pass 		= $this->input->post("pass");
+
+				$pass 		= md5($pass);
 
 				$data = array(
 					"nombre" 		=> $nombre,
@@ -179,6 +210,7 @@ class Usuario extends CI_Controller{
 					);
 
 					if($pass != null){
+						$pass 		= md5($pass);
 						$data['pass']	= $pass;
 					}
 

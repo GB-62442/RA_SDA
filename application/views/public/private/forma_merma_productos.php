@@ -53,7 +53,7 @@
 					</div>
 					<div class="col">
 						<?php if(isset($editable) && $editable != false){ ?>
-							<button class="form-control btn btn-outline-primary btn-sm btn-add" type="button">GUARDAR <i class="fa-solid fa-chart-simple"></i></button>
+							<button class="form-control btn btn-outline-primary btn-sm btn-add" type="button">GUARDAR <i class="fa-solid fa-floppy-disk"></i></button>
 						<?php }else{ ?>
  
 						<?php } ?>

@@ -16,9 +16,18 @@ class Usuario_model extends CI_Model{
         return ($query->num_rows() == 1) ? $query->row() : NULL;
     }
 
-     public function getSesionesById($id)
+     public function getSesionesById($id, $inicio, $final)
     {
         $cmd = "SELECT usuario.idUsuario, nombre, rol, resultado, fecha FROM usuario inner join registrosesion on Usuario.idUsuario=registrosesion.idUsuario where usuario.idUsuario = ".$id;
+
+        $busqueda = "";
+        if($inicio!= null && $inicio != "" && $final != null && $final != ""){
+            $busqueda = " AND date(fecha) BETWEEN CAST('".$inicio."' AS DATE) AND CAST('".$final."' AS DATE)";
+
+        }
+
+        $cmd  =$cmd.$busqueda." order by fecha desc";
+        
 
         $query = $this->db->query($cmd);
         return $query->num_rows() > 0 ? $query->result() : NULL;

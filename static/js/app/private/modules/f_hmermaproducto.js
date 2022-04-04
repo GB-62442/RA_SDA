@@ -1,7 +1,6 @@
 jQuery(document).ready(function ($) {
 	console.log('en -  f_hmermaproducto.js');
-
-	$(document).ready(function () {
+ 
 		console.log('ready!');
 
  			if($('#id_registro').val() !== ''){
@@ -52,12 +51,38 @@ jQuery(document).ready(function ($) {
 /*			console.log(base_url() + 'mermaproducto/tabla?id=' + $('#id_registro').val());*/
  		 }
 
+
+	$(document).on('click', '.btn-search', function (event) {
+		event.preventDefault();
+/*  
+ alert(base_url() + 'mermaproducto/tabla?id=' 
+ 	+ $('#id_registro').val() 
+ 	+ '&inicio='+ $('#inicio').val() 
+ 	+ '&fin=' +$('#final').val());
+*/
+
+ $('#tabla-datos').load(base_url() + 'mermaproducto/tabla?id=' 
+ 	+ $('#id_registro').val() 
+ 	+ '&inicio='+ $('#inicio').val() 
+ 	+ '&fin=' +$('#final').val());
+
 	});
 
 
+	$(document).on('click', '.btn-export', function (event) {
+		event.preventDefault();
+		window.open(base_url() + 'mermaproducto/exportCSV?id=' 
+ 	+ $('#id_registro').val() 
+ 	+ '&inicio='+ $('#inicio').val() 
+ 	+ '&fin=' +$('#final').val());
+/*  
+ 
+ $('#tabla-datos').load(base_url() + 'mermaproducto/tabla?id=' 
+ 	+ $('#id_registro').val() 
+ 	+ '&inicio='+ $('#inicio').val() 
+ 	+ '&fin=' +$('#final').val());*/
 
-
-
+	});
 
 });
 

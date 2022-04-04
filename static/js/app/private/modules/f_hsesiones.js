@@ -1,7 +1,7 @@
 jQuery(document).ready(function ($) {
 	console.log('en -  f_hsesion.js');
 
-	$(document).ready(function () {
+ 
 		console.log('ready!');
 
  			if($('#id_registro').val() !== ''){
@@ -27,14 +27,16 @@ jQuery(document).ready(function ($) {
 				},
 			});  
 
-/*			$('#tabla-datos').load(base_url() + 'usuario/tablahistorico?id=' + $('#id_registro').val());
-*//*			console.log(base_url() + 'mermaproducto/tabla?id=' + $('#id_registro').val());*/
+
  		 }
+	$(document).on('click', '.btn-search', function (event) {
+		event.preventDefault();
+		 $('#tabla-datos').load(base_url() + 'usuario/tablasesiones?id=' 
+		 	+ $('#id_registro').val() 
+		 	+ '&inicio='+ $('#inicio').val() 
+		 	+ '&fin=' +$('#final').val());
 
 	});
-
-
-
 
 
 

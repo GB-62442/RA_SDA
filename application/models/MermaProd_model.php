@@ -15,9 +15,17 @@ class MermaProd_model extends CI_Model{
 		return $this->db->insert('mermaproducto', $data) ? true : NULL;
 	}
 
- 	public function getById($id)
+ 	public function getById($id, $inicio, $final)
     {
         $cmd = "SELECT producto.idProducto, producto.nombre as nombreproducto, producto.unidadMedida, precioVenta, proveedor.idProveedor, proveedor.nombre as nombreproveedor, fecha, cantidad FROM mermaproducto inner join producto on mermaproducto.idProducto=producto.idProducto inner join proveedor on proveedor.idProveedor= producto.idProveedor where producto.idProducto  = ".$id;
+
+        $busqueda = "";
+        if($inicio!= null && $inicio != "" && $final != null && $final != ""){
+        	$busqueda = " AND date(fecha) BETWEEN CAST('".$inicio."' AS DATE) AND CAST('".$final."' AS DATE)";
+
+        }
+
+        $cmd  =$cmd.$busqueda." order by fecha desc";
 
         $query = $this->db->query($cmd);
 		return $query->num_rows() > 0 ? $query->result() : NULL;

@@ -19,9 +19,18 @@ class CompraInsu_model extends CI_Model{
 		return $this->db->insert('puntoventainsumo', $data) ? true : NULL;
 	}     
 
-	public function getById($id)
+	public function getById($id, $inicio, $final)
     {
         $cmd = "SELECT insumo.idInsumo, insumo.nombre as nombreinsumo, proveedor.idProveedor, proveedor.nombre as nombreproveedor, fecha, cantidad FROM comprasinsumo inner join insumo on comprasinsumo.idInsumo=insumo.idInsumo inner join proveedor on proveedor.idProveedor= insumo.idProveedor where insumo.idInsumo  = ".$id;
+
+		$busqueda = "";
+        if($inicio!= null && $inicio != "" && $final != null && $final != ""){
+        	$busqueda = " AND date(fecha) BETWEEN CAST('".$inicio."' AS DATE) AND CAST('".$final."' AS DATE)";
+
+        }
+
+        $cmd  =$cmd.$busqueda." order by fecha desc";
+
 
         $query = $this->db->query($cmd);
 		return $query->num_rows() > 0 ? $query->result() : NULL;

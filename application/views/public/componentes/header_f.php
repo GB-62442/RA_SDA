@@ -65,6 +65,21 @@
                       <li class="nav-item">
                         <a class="nav-link" href="<?=base_url('/controlador/reportes')?>">Reportes</a>
                       </li>
+                      <?php
+                      if($rol != 0){
+                        ?>
+                        <li class="nav-item">
+                          <a class="nav-link" href="<?=base_url('/controlador/usuarios')?>">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="<?=base_url('/controlador/puntosVenta')?>">Puntos de venta</a>
+                        </li>
+                        <?php
+                      }
+                      ?>
+                      <li>
+                        <a class="nav-link" href="<?=base_url('/acceso/logout')?>">Cerrar sesión</a>
+                      </li>
                     </ul>
 
                   </div>

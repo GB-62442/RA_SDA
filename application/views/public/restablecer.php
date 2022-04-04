@@ -16,8 +16,8 @@
 			    <p>Restablecer contraseña</p>
 			    <form>
 				  <div class="form-group m-2">
-				    <label for="exampleInputEmail1">Usuario</label>
-				    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+				    <label for="email">Email</label>
+				    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
 				  </div> 
 				  <div class="form-check m-2 text-center">
 				  	<a href="<?=base_url('/controlador')?>" class="text-muted">Iniciar sesión</a>
@@ -27,7 +27,7 @@
 
 				    </div>
 				    <div class="col-sm">
-				     <button type="submit" class="btn btn-primary form-control">ACCEDER</button>
+				     <button type="submit" class="btn btn-primary form-control btn-recovery">ACCEDER</button>
 				    </div>
 				    <div class="col-sm">
 				    </div>

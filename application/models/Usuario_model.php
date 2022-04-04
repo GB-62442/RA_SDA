@@ -16,6 +16,21 @@ class Usuario_model extends CI_Model{
         return ($query->num_rows() == 1) ? $query->row() : NULL;
     }
 
+    public function getByEmail($email)
+    {
+        $cmd = "SELECT * FROM Usuario where email = '$email'";
+
+        $query = $this->db->query($cmd);
+        return ($query->num_rows() == 1) ? $query->row() : NULL;
+    }
+
+    public function updatePasswordByEmail($email, $newPass){
+        $cmd = "UPDATE usuario SET pass = '$newPass' WHERE email = '$email'";
+
+        $query = $this->db->query($cmd);
+        return ($this->db->affected_rows() == 1) ? true : NULL;
+    }
+
      public function getSesionesById($id, $inicio, $final)
     {
         $cmd = "SELECT usuario.idUsuario, nombre, rol, resultado, fecha FROM usuario inner join registrosesion on Usuario.idUsuario=registrosesion.idUsuario where usuario.idUsuario = ".$id;

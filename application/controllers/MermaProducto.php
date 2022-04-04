@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No se permite el acceso directo.');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+
 class MermaProducto extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
@@ -97,67 +103,87 @@ class MermaProducto extends CI_Controller{
 
 
 
-  public function exportCSV(){ 
-   // file name 
-
-	$this->form_validation->set_data($_GET)->set_rules('id', 'id del producto', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
-
-
-	if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
-		$id 	= $this->input->get("id");
-		$inicio = $this->input->get("inicio");
-		$fin 	= $this->input->get("fin");
-
-		$data = array(
-			"id" 	=> $id,
-			"inicio"=> $inicio,
-			"fin"	=> $fin,
-		);
-
-   		$filename = 'MermasProducto'.date('Ymd').'('.$inicio.'-'.$fin.').csv'; 
-   		header("Content-Description: File Transfer"); 
-   		header("Content-Disposition: attachment; filename=$filename"); 
-   		header("Content-Type: application/csv; ");
-   
-   // get data 
-   		$resultData = $this->MermaProd_model->getById($id, $inicio, $fin);
-
-   		// file creation 
-   		$file = fopen('php://output', 'w');
- 
-   		$col_names = array(
-   			"idProducto",
-   			"nombreproducto",
-   			"unidadMedida",
-   			"idProveedor",
-   			"nombreproveedor",
-   			"fecha",
-   			"cantidad"
-   		); 
-
-     	fputcsv($file, array_values($col_names), ';', ' ');
-   		foreach ($resultData as $row){
-   		 $temp = array(
-   		 	$row->idProducto,
-   		 	$row->nombreproducto, 
-   		 	$row->unidadMedida, 
-   		 	$row->idProveedor,
-   		 	$row->nombreproveedor,
-   		 	$row->fecha,
-   		 	$row->cantidad,
-   		 );
-
-     		fputcsv($file, array_values($temp), ';', ' ');
-
-   		}
-
-   		fclose($file); 
-   		exit; 
-
-	} 
- 
-
-  }
+	public function exportCSV(){ 
+		// file name 
+	 
+		 $this->form_validation->set_data($_GET)->set_rules('id', 'id del producto', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
+	 
+	 
+		 if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
+			 $id 	= $this->input->get("id");
+			 $inicio = $this->input->get("inicio");
+			 $fin 	= $this->input->get("fin");
+	 
+			 $data = array(
+				 "id" 	=> $id,
+				 "inicio"=> $inicio,
+				 "fin"	=> $fin,
+			 );
+		// get data 
+				$resultData = $this->MermaProd_model->getById($id, $inicio, $fin);
+	 
+			$spreadsheet = new Spreadsheet();
+			 $sheet = $spreadsheet->getActiveSheet();
+			 $sheet->setCellValue('A1', 'idProducto');
+			 $sheet->setCellValue('B1', 'nombreproducto');
+			 $sheet->setCellValue('C1', 'unidadMedida');
+			 $sheet->setCellValue('D1', 'idProveedor');
+			 $sheet->setCellValue('E1', 'nombreproveedor');
+			 $sheet->setCellValue('F1', 'fecha');
+			 $sheet->setCellValue('G1', 'cantidad');
+	 
+	 
+			 $start = 2;
+				foreach ($resultData as $row){
+				 $sheet->setCellValue('A'.$start, $row->idProducto);
+				 $sheet->setCellValue('B'.$start, $row->nombreproducto);
+				 $sheet->setCellValue('C'.$start, $row->unidadMedida);
+				 $sheet->setCellValue('D'.$start, $row->idProveedor);
+				 $sheet->setCellValue('E'.$start, $row->nombreproveedor);
+				 $sheet->setCellValue('F'.$start, $row->fecha);
+				 $sheet->setCellValue('G'.$start, $row->cantidad);
+				 $start = $start+1;
+				}
+	 
+				$styleThinBlackBorderOutline = [
+				 'borders' => [
+					 'allBorders' => [
+						 'borderStyle' => Border::BORDER_THIN,
+						 'color' => ['argb' => 'FF000000'],
+					 ],
+				 ],
+			 ];
+				 //Font BOLD
+				 $sheet->getStyle('A1:G1')->getFont()->setBold(true);		
+				 $sheet->getStyle('A1:D10')->applyFromArray($styleThinBlackBorderOutline);
+				 //Alignment
+				 //fONT SIZE
+				 $sheet->getStyle('A1:D10')->getFont()->setSize(12);
+				 $sheet->getStyle('A1:G2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+	 
+				 $sheet->getStyle('A2:D100')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+				 //Custom width for Individual Columns
+				 $sheet->getColumnDimension('A')->setWidth(20);
+				 $sheet->getColumnDimension('B')->setWidth(20);
+				 $sheet->getColumnDimension('C')->setWidth(20);
+				 $sheet->getColumnDimension('D')->setWidth(20);
+				 $sheet->getColumnDimension('E')->setWidth(20);
+				 $sheet->getColumnDimension('F')->setWidth(20);
+				 $sheet->getColumnDimension('G')->setWidth(20);
+				
+			 $writer = new Xlsx($spreadsheet);
+	 
+			 $filename = 'MermasProducto'.date('Ymd').'('.$inicio.'-'.$fin.').xlsx'; 
+			 header("Content-Description: File Transfer"); 
+			 header("Content-Disposition: attachment; filename=$filename"); 
+			 header("Content-Type: application/vnd.ms-excel ");
+	 
+			 $writer->save('php://output');
+	 
+		 } 
+	  
+	 
+	   }
 
 
 }

@@ -258,24 +258,22 @@ class Controlador extends CI_Controller{
 			$res = $this->Acceso_model->getPuntosVenta(1);
 			$punto_ventaS = $this->input->get('punto_venta');
 			$data['scripts'][] = 'app/private/modules/detalle_recetas';
+			$lePertenece = 0;
 			foreach ($res as $punto_venta) {
 				if($punto_venta->idPuntoVenta == $punto_ventaS) {
-					//cargar el modelo para hacer el if de si esos puntos de venta le corresponden
-					$this->load->view( "public/componentes/header_f", array( 'rol' => $this->session->userdata('rol') == 1 ? 1 : 0) );
-					$this->load->view( "public/private/forma_receta", $data );
-					$this->load->view( "public/componentes/footer_f");
-				}else{
-					$data['scripts'][]          = 'app/private/modules/recetas';
-					$this->load->view( "public/componentes/header_f", array( 'rol' => $this->session->userdata('rol') == 1 ? 1 : 0) );
-					$this->load->view( "public/private/recetas", $data );
-					$this->load->view( "public/componentes/footer_f");
+					$lePertenece = 1;
+
 				}
 			}
-		}else{
-			redirect('/', 'refresh');
-		}		
+			if($lePertenece == 1){
+				$this->load->view( "public/componentes/header_f", array( 'rol' => $this->session->userdata('rol') == 1 ? 1 : 0) );
+				$this->load->view( "public/private/forma_receta", $data );
+				$this->load->view( "public/componentes/footer_f");
+			}
 
 	}
+}
+
 
 	public function productos(){
 		if($this->session->userdata('login') == true){
@@ -579,3 +577,6 @@ class Controlador extends CI_Controller{
 	}
 }
 ?>
+
+
+

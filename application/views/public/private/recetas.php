@@ -1,12 +1,32 @@
- 
-<div class="container-fluid mt-4 pt-2 col-12">
+ <div class="container-fluid mt-4 pt-2 col-12">
 
 	<div class="page-header" id="banner">
 
 		<h1>Gestión recetas</h1>
 	</div>
-	
 
+	<div class="modal fade" id="myModal" role="dialog">
+  		<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<h5 class="modal-title" id="modalTitle">ELIMINAR RECETA</h5>
+        			<button type="button" id="boton_cerrar_modal" class="btn-close" data-dismiss="modal" aria-label="Close">
+          				<span aria-hidden="true"></span>
+        			</button>
+      			</div>
+      			<div class="modal-body">
+        			<p id="mensaje_eliminar" >Receta a eliminar</p>
+					<input type="hidden" name="idreceta" id="id_receta_oculta">
+     			</div>
+     			<div class="modal-footer">
+        			<button type="button" class="btn btn-primary" onclick="eliminarReceta()">Eliminar</button>
+        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+
+	
 	<div class="pt-2">
 		<div class="row m-2">
 			<nav aria-label="breadcrumb">

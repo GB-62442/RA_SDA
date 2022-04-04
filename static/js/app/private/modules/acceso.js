@@ -32,6 +32,35 @@ jQuery(document).ready(function ($) {
 		});
 	});
 
+	$(document).on('click', '.btn-forgot', function (event) {
+		event.preventDefault();
+
+		$.ajax({
+			url: base_url() + 'acceso/login',
+			type: 'post',
+			data: { 
+				email: 		$('#email').val(),
+				password: 	$('#password').val(),
+			},
+			cache: false,
+			dataType: 'json',
+			success: function (json) {
+ 				console.log(json.message);
+				console.log(json.data);
+
+				if (json.resultado == 'true') {
+					alert(json.mensaje);
+				} else {
+					alert(json.mensaje);
+				}
+			},
+			error: function (ts) {
+				console.log(ts.responseText);
+				alert('Ocurrió un error, por favor vuelva a intentarlo');
+			},
+		});
+	});
+
 	$(document).on('click', '.btn-update', function (event) {
 		event.preventDefault();
 

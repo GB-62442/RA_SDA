@@ -55,6 +55,33 @@
 			</div>
 
 			<div class="row m-2">
+				<div class="form-group col-md-2">
+					<label for="inicio" class="form-label mt-4">Fecha inicio</label>
+					<input type="date" class="form-control" id="inicio" aria-describedby="emailHelp" placeholder="ID del producto" value="<?php if(isset($id)) echo($id); ?>" >
+				</div>
+
+				<div class="form-group col-md-2">
+					<label for="final" class="form-label mt-4">Fecha final</label>
+					<input type="date" class="form-control" id="final" aria-describedby="emailHelp" placeholder="Nombre del producto" >
+							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
+				</div>
+
+				<div class="form-group col-md-2">
+					<label for="final" class="form-label text-light mt-4"> .</label>
+					<button class="btn btn-dark form-control btn-search" id="buscar">Buscar</button>
+							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
+				</div>
+
+
+				<div class="form-group col-md-2">
+					<label for="final" class="form-label text-light mt-4"> .</label>
+					<button class="btn btn btn-primary form-control btn-export" id="exportar">Exportar</button>
+							<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->					    
+				</div>				
+
+			</div>
+
+			<div class="row m-2">
 				<div class="table-responsive">
 					<div id="tabla-datosinsu"></div>			
 	 			</div>

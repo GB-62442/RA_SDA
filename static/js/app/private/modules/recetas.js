@@ -16,6 +16,7 @@ function recetaDatos(){
 			var insumo_usados = 0;
 			var presentacion_cantidad = 0;
 
+			console.log(datos);
 
 			datos.map((dato,index)=>{
 				if (nombre_receta == dato.nombre) {
@@ -48,18 +49,17 @@ function recetaDatos(){
 				<tr>
 				 
 					<th>${id_receta}</th>
-				    <td>${nombre_receta}</td>
+				    <td id="nombre${id_receta}">${nombre_receta}</td>
 				    <td>${insumo_usados}</td>
 				    <td>${presentacion_cantidad} - ${presentacion_unidad}</td>
 				    <td>${precio_venta}</td>
 				    <td>  	
 						<a href="http://localhost/inventario/controlador/detallereceta?punto_venta=1&id_receta=${id_receta}"><button type="button" class="btn btn-outline-dark btn-sm"><i class="fa-solid fa-pen-to-square"></i></button></a>
-						<button type="button" class="btn btn-outline-dark btn-sm"><i class="fa-solid fa-trash"></i></button>
+						<button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#myModal" onclick="mostrarModal(${id_receta})" ><i class="fa-solid fa-trash"></i></button>
 				    </td>
 				</tr> 
 				`;
 			}
-
 		},
 		error: function (ts) {
 			console.log(ts.responseText);
@@ -68,3 +68,30 @@ function recetaDatos(){
 	});
 }
 
+function eliminarReceta(){
+	let id = document.getElementById('id_receta_oculta').value;
+
+	$.ajax({
+		"url"     : base_url() + "Recetas/eliminarReceta",
+		"type"    : "post",
+		"data": { 
+			id_receta: id,
+			},
+		"dataType"     : "json",
+		"success"      : function( json ) {
+			$("#boton_cerrar_modal").click();
+			document.getElementById('tabla-recetas').innerHTML = '';
+			recetaDatos();
+		},
+		error: function (ts) {
+			console.log(ts.responseText);
+			alert('Ocurrió un error, por favor vuelva a intentarlo');       
+		}
+	});
+}
+
+//eliminar
+function mostrarModal(id){
+	document.getElementById('id_receta_oculta').value = id;
+	document.getElementById('mensaje_eliminar').innerHTML = `Deseas eliminar la receta ${id}`;
+}

@@ -25,7 +25,8 @@ class Usuario_model extends CI_Model{
     }
 
     public function updatePasswordByEmail($email, $newPass){
-        $cmd = "UPDATE usuario SET pass = '$newPass' WHERE email = '$email'";
+        $newPassEncriptado = md5($newPass);
+        $cmd = "UPDATE usuario SET pass = '$newPassEncriptado' WHERE email = '$email'";        
 
         $query = $this->db->query($cmd);
         return ($this->db->affected_rows() == 1) ? true : NULL;
@@ -80,21 +81,3 @@ class Usuario_model extends CI_Model{
     }
      
 }
-
-
-/*
-{
-	"table": "Usuario",
-	"rows":
-	[
-		{
-			"idUsuario": 1,
-			"unidadMedida": "lts",
-			"idProveedor": 1,
-			"nombre": "Usuario 1",
-			"precioVenta": 1
-		}
-	]
-}
-
-*/

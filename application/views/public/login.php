@@ -16,11 +16,11 @@
 			    <p>Iniciar sesión</p>
 			    <form>
 				  <div class="form-group m-2">
-				    <label for="email">Usuario</label>
+				    <label for="email">Email</label>
 				    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingresa tu email">
 				  </div>
 				  <div class="form-group m-2">
-				    <label for="password">Contraseña</label>
+				    <label for="password">Email</label>
 				    <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
 				  </div>
 				  <div class="form-check m-2">

@@ -103,6 +103,46 @@ class Usuario extends CI_Controller{
 		//}
 	}
 
+	public function insertsesion(){
+		//if($this->session->userdata('login') == true){
+
+			$respuesta = array();
+			$respuesta['resultado'] = 'false';
+			$respuesta['mensaje'] = 'Ocurrio un error durante la petición';
+			$respuesta['respuesta'] = null;
+
+			$this->form_validation->set_rules('idUsuario', 'IdUsuario', 'required|integer|greater_than_equal_to[1]|max_length[11]|trim');
+			$this->form_validation->set_rules('resultado', 'Resultado', 'required|integer|max_length[1]|trim');
+
+			if($this->form_validation->run()/* &&  $this->input->is_ajax_request()*/){
+				$idUsuario 		= $this->input->post("idUsuario");
+				$resultado 		= $this->input->post("resultado");
+
+				$data = array(
+					"idUsuario" 		=> $idUsuario,
+					"resultado" 		=> $resultado
+				);
+
+				$is_affected = $this->Usuario_model->insertSesion($data);
+
+				if($is_affected != NULL){
+					$respuesta['resultado'] = 'true';
+					$respuesta['mensaje'] = 'El registro se insertó correctamente';
+				}
+
+			}
+
+            /*Si la validación de campos es incorrecta*/
+            else {
+            	$this->form_validation->set_error_delimiters('','');
+				$respuesta['error'] = validation_errors();
+            }
+			
+            echo json_encode($respuesta);
+
+		//}
+	}
+
 
 	public function tablasesiones(){
 		//if($this->session->userdata('login') == true){

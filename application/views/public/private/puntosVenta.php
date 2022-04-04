@@ -33,7 +33,13 @@
 					
 				</div>
 				<div class="col">
-					<a href="<?=base_url('/controlador/detalleptventa')?>" class="form-control btn btn-primary btn-sm" type="button">AGREGAR <i class="fa-solid fa-chart-simple"></i></a>
+					<?php
+					if($rol == 1){
+						?>
+						<a href="<?=base_url('/controlador/detalleptventa')?>" class="form-control btn btn-primary btn-sm" type="button">AGREGAR <i class="fa-solid fa-chart-simple"></i></a>
+						<?php
+					}
+					?>
 					<div class="row mt-2"></div>
 					<!-- <button class="form-control btn btn-outline-primary btn-sm" type="button">EXPORTAR A EXCEL <i class="fa-solid fa-file-export"></i></button> -->
 				</div>

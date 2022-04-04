@@ -1,4 +1,3 @@
- 
 <div class="container-fluid mt-4 pt-2 col-12">
 
 	<div class="page-header" id="banner">
